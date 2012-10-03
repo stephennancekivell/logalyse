@@ -10,6 +10,7 @@ analyseApp.controller('FileOpenerCtrl', function($scope) {
 
     reader.onload = function(e){
     	$scope.fileText = e.target.result;
+    	$scope.lines = e.target.result.split('\n');
     	$scope.$digest();
     }
 
