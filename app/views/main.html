@@ -1,23 +1,11 @@
-<div class="hero-unit">
-  <h1>Cheerio!</h1>
-  <p>You now have</p>
-  <ul>
-      <li ng-repeat="thing in awesomeThings">{{thing}}</li>
-  </ul>
-  <p>installed.</p>
-  <h3>Enjoy coding! - Yeoman</h3>
-
-  <div ng-controller="FileOpenerCtrl">
-  	<h3>File Opener</h3>
-  	<input type="file" id="files" name="files[]" multiple />
-  	<input type="text" ng-model="search" placeholder="search" />
-  	<ul>
-	  	<li ng-repeat="line in lines | filter:search">
-	  		<p>{{line}}</p>
-	  	</li>
-  	</ul>
-  	<pre>
-{{fileText}}
-  	</pre>
-  </div>
+<div ng-controller="FileOpenerCtrl">
+	<h3>File Opener</h3>
+	<input type="file" id="files" name="files[]" multiple />
+	<input type="text" ng-model="query" placeholder="filter" />
+	<input type="text" ng-model="dateSearch" placeholder="dateSearch" />
+	<ul>
+  	<li ng-repeat="line in lines | filter:query">
+  		<p><span class="date">{{getDate(line)}}</span> {{line}}</p>
+  	</li>
+	</ul>
 </div>
