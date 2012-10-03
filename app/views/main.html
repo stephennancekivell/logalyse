@@ -3,8 +3,9 @@
 	<input type="file" id="files" name="files[]" multiple />
 	<input type="text" ng-model="query" placeholder="filter" />
 	<input type="text" ng-model="dateSearch" placeholder="dateSearch" />
+	<input type="text" ng-model="limit" placeholder="limit" />
 	<ul>
-  	<li ng-repeat="line in lines | filter:query">
+  	<li ng-repeat="line in lines | filter:query | limitTo:limit">
   		<p><span class="date">{{getDate(line)}}</span> {{line}}</p>
   	</li>
 	</ul>

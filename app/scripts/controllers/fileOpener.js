@@ -2,6 +2,7 @@
 
 analyseApp.controller('FileOpenerCtrl', function($scope) {
 	$scope.fileText = '';
+	$scope.limit = 5
 	$scope.lines = ['Sep 30 23:17:01 stephen-ThinkPad-T520 CRON[13174]: pam_unix(cron:session): session closed for user root'];
 	function handleFileSelect(evt) {
     var files = evt.target.files; // FileList object
