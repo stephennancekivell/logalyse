@@ -27,12 +27,15 @@ analyseApp.controller('FileOpenerCtrl', function($scope, userPrefs) {
 
   $scope.getDate = function(line) {
   	var dateString = line.match(new RegExp($scope.p.dateSearch, "i"))[0];
-    console.log('dateString', dateString);
   	return Date.parseExact(dateString, $scope.p.dateFormat);
   }
 
+  function subset(line) {
+    return line.slice(parseInt($scope.p.subsetStart), parseInt($scope.p.subsetStart)+parseInt($scope.subsetCount));
+  }
+
   $scope.drawChart = function(){
-    $scope.data = $.map($scope.lines.slice($scope.p.subsetStart, $scope.p.subsetStart+$scope.p.subsetCount), function(line){
+    $scope.data = $.map(subset($scope.lines), function(line){
   		return {date:$scope.getDate(line),count:0};
   	});
     console.log($scope.data);
