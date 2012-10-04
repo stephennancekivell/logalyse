@@ -8,7 +8,7 @@
 	<input type="text" ng-model="p.subsetStart" placeholder="subset start" />
 	<input type="button" ng-click="drawChart()" value="Draw Chart" />
 	<ul>
-  	<li ng-repeat="line in lines | filter:p.query | subset:p.subsetStart:p.subsetCount">
+  	<li ng-repeat="line in lines | filter:p.query | subset:p.subsetStart:p.subsetCount | highlight:p.dateSearch">
   		<p><span class="date">{{getDate(line)|date}}</span> {{line}}</p>
   	</li>
 	</ul>
