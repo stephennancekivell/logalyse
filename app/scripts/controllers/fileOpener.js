@@ -3,7 +3,9 @@
 analyseApp.controller('FileOpenerCtrl', function($scope) {
 	$scope.fileText = '';
 	$scope.limit = 5;
-	$scope.lines = ['Sep 30 23:17:01 stephen-ThinkPad-T520 CRON[13174]: pam_unix(cron:session): session closed for user root'];
+	$scope.linesIn = ['Sep 30 23:17:01 stephen-ThinkPad-T520 CRON[13174]: pam_unix(cron:session): session closed for user root'];
+  $scope.dateSearch = "\w+ \d+ \d+:\d+"
+  $scope.dateFormat = "MMM dd hh:mm"
 
 	function handleFileSelect(evt) {
     var files = evt.target.files; // FileList object
@@ -13,7 +15,7 @@ analyseApp.controller('FileOpenerCtrl', function($scope) {
 
     reader.onload = function(e){
     	$scope.fileText = e.target.result;
-    	$scope.lines = e.target.result.split('\n');
+    	$scope.linesIn = e.target.result.split('\n');
     	$scope.$digest();
     }
 
@@ -23,25 +25,30 @@ analyseApp.controller('FileOpenerCtrl', function($scope) {
 
   $scope.getDate = function(line) {
   	var dateString = line.match(new RegExp($scope.dateSearch, "i"))[0];
-  	return Date.parse(dateString);
+  	return Date.parseExact(dateString, $scope.dateFormat);
   }
 
   $scope.getDateString = function(line){
   	var d = $scope.getDate(line);
   	if (d == null) {
-  		return '';
+  		return 'no date';
   	} else {
-  		return d.toString('d-M-yy');
+  		return d.toString($scope.dateFormat);
   	}
   }
 
   $scope.drawChart = function(){
-  	var d = $.map($scope.lines, function(line){
-  		return [$scope.getDate(line),0];
+    $scope.data = $.map($scope.lines.slice(0, $scope.limit), function(line){
+  		return {date:$scope.getDate(line),count:0};
   	});
-		//var d = [[$scope.getDate($scope.lines[0]),1], [$scope.getDate($scope.lines[1]),2]];
+    console.log($scope.data);
 
+    $scope.data = _.groupBy($scope.data, function(o){
+      return o.date.getHours();
+    });
 
-  	$.plot($("#chart"), [d], { xaxis: { mode: "time" } });
+    $scope.data = $.map($scope.data, function(a){
+      return [a[0].date.getHours(), a.length];
+    });
   }
 });

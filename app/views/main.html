@@ -3,13 +3,15 @@
 	<input type="file" id="files" name="files[]" multiple />
 	<input type="text" ng-model="query" placeholder="filter" />
 	<input type="text" ng-model="dateSearch" placeholder="dateSearch" />
+	<input type="text" ng-model="dateFormat" placeholder="dateFormat" />
 	<input type="text" ng-model="limit" placeholder="limit" />
 	<input type="button" ng-click="drawChart()" value="Draw Chart" />
 	<ul>
-  	<li ng-repeat="line in lines | filter:query | limitTo:limit">
-  		<p><span class="date">{{getDateString(line)}}</span> {{line}}</p>
+  	<li ng-repeat="line in lines | filter:query | limitTo:limit:false">
+  		<p><span class="date">{{getDate(line)|date}}</span> {{line}}</p>
   	</li>
 	</ul>
 	<div id="chart">
 	</div>
+	<div line-chart data="data" class="chart"></div>
 </div>
