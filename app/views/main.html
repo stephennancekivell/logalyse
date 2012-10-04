@@ -1,14 +1,14 @@
 <div ng-controller="FileOpenerCtrl">
 	<h3>File Opener</h3>
 	<input type="file" id="files" name="files[]" multiple />
-	<input type="text" ng-model="query" placeholder="filter" />
-	<input type="text" ng-model="dateSearch" placeholder="dateSearch" />
-	<input type="text" ng-model="dateFormat" placeholder="dateFormat" />
-	<input type="text" ng-model="subsetCount" placeholder="subset count" />
-	<input type="text" ng-model="subsetStart" placeholder="subset start" />
+	<input type="text" ng-model="p.query" placeholder="filter" />
+	<input type="text" ng-model="p.dateSearch" placeholder="dateSearch" />
+	<input type="text" ng-model="p.dateFormat" placeholder="dateFormat" />
+	<input type="text" ng-model="p.subsetCount" placeholder="subset count" />
+	<input type="text" ng-model="p.subsetStart" placeholder="subset start" />
 	<input type="button" ng-click="drawChart()" value="Draw Chart" />
 	<ul>
-  	<li ng-repeat="line in lines | filter:query | subset:subsetStart:subsetCount">
+  	<li ng-repeat="line in lines | filter:p.query | subset:p.subsetStart:p.subsetCount">
   		<p><span class="date">{{getDate(line)|date}}</span> {{line}}</p>
   	</li>
 	</ul>

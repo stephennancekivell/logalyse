@@ -1,13 +1,14 @@
 'use strict';
 
-analyseApp.controller('FileOpenerCtrl', function($scope) {
-	$scope.fileText = '';
-  $scope.subsetStart = 0;
-	$scope.subsetCount = 5;
-	$scope.lines = ['Sep 30 23:17:01 stephen-ThinkPad-T520 CRON[13174]: pam_unix(cron:session): session closed for user root'];
-  $scope.dateSearch = "\\w+ \\d+ \\d+:\\d+"
-  $scope.dateFormat = "MMM dd hh:mm"
+analyseApp.controller('FileOpenerCtrl', function($scope, userPrefs) {
+  $scope.lines = ['Sep 30 23:17:01 stephen-ThinkPad-T520 CRON[13174]: pam_unix(cron:session): session closed for user root'];
 
+  $scope.p = userPrefs.get();
+
+  $scope.$watch('p', function(){
+    userPrefs.put($scope.p);
+  },true);
+  
 	function handleFileSelect(evt) {
     var files = evt.target.files; // FileList object
     console.log('files',files);
@@ -25,21 +26,13 @@ analyseApp.controller('FileOpenerCtrl', function($scope) {
   document.getElementById('files').addEventListener('change', handleFileSelect, false);
 
   $scope.getDate = function(line) {
-  	var dateString = line.match(new RegExp($scope.dateSearch, "i"))[0];
-  	return Date.parseExact(dateString, $scope.dateFormat);
-  }
-
-  $scope.getDateString = function(line){
-  	var d = $scope.getDate(line);
-  	if (d == null) {
-  		return 'no date';
-  	} else {
-  		return d.toString($scope.dateFormat);
-  	}
+  	var dateString = line.match(new RegExp($scope.p.dateSearch, "i"))[0];
+    console.log('dateString', dateString);
+  	return Date.parseExact(dateString, $scope.p.dateFormat);
   }
 
   $scope.drawChart = function(){
-    $scope.data = $.map($scope.lines.slice($scope.subsetStart, $scope.subsetStart+$scope.subsetCount), function(line){
+    $scope.data = $.map($scope.lines.slice($scope.p.subsetStart, $scope.p.subsetStart+$scope.p.subsetCount), function(line){
   		return {date:$scope.getDate(line),count:0};
   	});
     console.log($scope.data);
