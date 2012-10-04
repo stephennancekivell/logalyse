@@ -4,10 +4,11 @@
 	<input type="text" ng-model="query" placeholder="filter" />
 	<input type="text" ng-model="dateSearch" placeholder="dateSearch" />
 	<input type="text" ng-model="dateFormat" placeholder="dateFormat" />
-	<input type="text" ng-model="limit" placeholder="limit" />
+	<input type="text" ng-model="subsetCount" placeholder="subset count" />
+	<input type="text" ng-model="subsetStart" placeholder="subset start" />
 	<input type="button" ng-click="drawChart()" value="Draw Chart" />
 	<ul>
-  	<li ng-repeat="line in lines | filter:query | limitTo:limit:false">
+  	<li ng-repeat="line in lines | filter:query | subset:subsetStart:subsetCount">
   		<p><span class="date">{{getDate(line)|date}}</span> {{line}}</p>
   	</li>
 	</ul>

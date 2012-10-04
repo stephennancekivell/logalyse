@@ -2,9 +2,10 @@
 
 analyseApp.controller('FileOpenerCtrl', function($scope) {
 	$scope.fileText = '';
-	$scope.limit = 5;
-	$scope.linesIn = ['Sep 30 23:17:01 stephen-ThinkPad-T520 CRON[13174]: pam_unix(cron:session): session closed for user root'];
-  $scope.dateSearch = "\w+ \d+ \d+:\d+"
+  $scope.subsetStart = 0;
+	$scope.subsetCount = 5;
+	$scope.lines = ['Sep 30 23:17:01 stephen-ThinkPad-T520 CRON[13174]: pam_unix(cron:session): session closed for user root'];
+  $scope.dateSearch = "\\w+ \\d+ \\d+:\\d+"
   $scope.dateFormat = "MMM dd hh:mm"
 
 	function handleFileSelect(evt) {
@@ -15,7 +16,7 @@ analyseApp.controller('FileOpenerCtrl', function($scope) {
 
     reader.onload = function(e){
     	$scope.fileText = e.target.result;
-    	$scope.linesIn = e.target.result.split('\n');
+    	$scope.lines = e.target.result.split('\n');
     	$scope.$digest();
     }
 
@@ -38,7 +39,7 @@ analyseApp.controller('FileOpenerCtrl', function($scope) {
   }
 
   $scope.drawChart = function(){
-    $scope.data = $.map($scope.lines.slice(0, $scope.limit), function(line){
+    $scope.data = $.map($scope.lines.slice($scope.subsetStart, $scope.subsetStart+$scope.subsetCount), function(line){
   		return {date:$scope.getDate(line),count:0};
   	});
     console.log($scope.data);
