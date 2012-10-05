@@ -13,11 +13,11 @@ analyseApp.controller('FileOpenerCtrl', function($scope, userPrefs) {
 
   $scope.$watch('p', function(){
     $scope.drawChart();
-  });
+  }, true);
 
   $scope.$watch('lines', function(){
     $scope.drawChart();
-  })
+  });
   
 	function handleFileSelect(evt) {
     var files = evt.target.files; // FileList object
@@ -25,7 +25,6 @@ analyseApp.controller('FileOpenerCtrl', function($scope, userPrefs) {
     var reader = new FileReader();
 
     reader.onload = function(e){
-    	$scope.fileText = e.target.result;
     	$scope.lines = e.target.result.split('\n');
     	$scope.$digest();
     }
@@ -49,15 +48,15 @@ analyseApp.controller('FileOpenerCtrl', function($scope, userPrefs) {
   }
 
   $scope.drawChart = function(){
-    console.log('start drawChart');
-    $scope.data = $.map(subset($scope.lines), function(line){
+    var lines = _.filter($scope.lines, function(line){return line.indexOf($scope.p.query) != -1;});
+    $scope.data = $.map(subset(lines), function(line){
   		return {date:$scope.getDate(line),count:0};
   	});
 
     $scope.data = _.filter($scope.data, function(d){return d.date != null});
 
     $scope.data = _.groupBy($scope.data, function(o){
-      return o.date.getHours();
+      return Math.floor(o.date.getTime() / $scope.p.groupBy);
     });
 
     $scope.data = _.toArray($scope.data);
