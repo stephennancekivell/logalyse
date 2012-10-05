@@ -49,6 +49,7 @@ analyseApp.controller('FileOpenerCtrl', function($scope, userPrefs) {
     $scope.data = $.map($scope.data, function(a){
       return [[a[0].date.getTime(), a.length]];
     });
+    $scope.data = _.sortBy($scope.data, function(d){return d[0]});
     $scope.data = [$scope.data];
     console.log($scope.data);
   }

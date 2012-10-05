@@ -10,9 +10,6 @@ analyseApp.directive('lineChart', function() {
     	scope.$watch('data', function(){
     		if (typeof scope.data != 'undefined'){
                 var conf = {
-                    yaxis: {
-                        max: 5
-                    },
                     xaxis: {
                         mode: 'time'
                     }
