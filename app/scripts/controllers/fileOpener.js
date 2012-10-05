@@ -3,12 +3,21 @@
 analyseApp.controller('FileOpenerCtrl', function($scope, userPrefs) {
   $scope.lines = ['Sep 30 23:17:01 stephen-ThinkPad-T520 CRON[13174]: pam_unix(cron:session): session closed for user root'];
   $scope.data = [];
+  $scope.loading = true;
 
   $scope.p = userPrefs.get();
 
   $scope.$watch('p', function(){
     userPrefs.put($scope.p);
   },true);
+
+  $scope.$watch('p', function(){
+    $scope.drawChart();
+  });
+
+  $scope.$watch('lines', function(){
+    $scope.drawChart();
+  })
   
 	function handleFileSelect(evt) {
     var files = evt.target.files; // FileList object
@@ -26,8 +35,13 @@ analyseApp.controller('FileOpenerCtrl', function($scope, userPrefs) {
   document.getElementById('files').addEventListener('change', handleFileSelect, false);
 
   $scope.getDate = function(line) {
-  	var dateString = line.match(new RegExp($scope.p.dateSearch, "i"))[0];
-  	return Date.parseExact(dateString, $scope.p.dateFormat);
+    try {
+    	var dateString = line.match(new RegExp($scope.p.dateSearch, "i"))[0];
+    	return Date.parseExact(dateString, $scope.p.dateFormat);
+    } catch(e){
+      console.log('return null');
+      return null;
+    }
   }
 
   function subset(line) {
@@ -35,10 +49,12 @@ analyseApp.controller('FileOpenerCtrl', function($scope, userPrefs) {
   }
 
   $scope.drawChart = function(){
+    console.log('start drawChart');
     $scope.data = $.map(subset($scope.lines), function(line){
   		return {date:$scope.getDate(line),count:0};
   	});
-    console.log($scope.data);
+
+    $scope.data = _.filter($scope.data, function(d){return d.date != null});
 
     $scope.data = _.groupBy($scope.data, function(o){
       return o.date.getHours();
@@ -51,6 +67,6 @@ analyseApp.controller('FileOpenerCtrl', function($scope, userPrefs) {
     });
     $scope.data = _.sortBy($scope.data, function(d){return d[0]});
     $scope.data = [$scope.data];
-    console.log($scope.data);
+    console.log('end drawChart', $scope.data);
   }
 });

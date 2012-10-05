@@ -1,0 +1,21 @@
+==analyse==
+
+
+Chart different tags in a log file.
+
+Chart amount of lines per hour/day/month. _.groupBy
+Chart by value in the log line.
+
+Limit amount of lines. Subset of data. By date or count.
+
+Click point on chart. navigate to log line.
+
+Different types of charts, line scatter plot.
+
+Infinate scroll type log viewer.
+
+Loading icon.
+
+login. beta testers.
+Sharing, dont need to login. Upload settings etc.
+Search for tags, formats, privacy around that.

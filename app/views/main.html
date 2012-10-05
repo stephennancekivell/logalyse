@@ -1,5 +1,6 @@
 <div ng-controller="FileOpenerCtrl">
 	<div line-chart data="data" class="chart"></div>
+	<div class="loading" ng-show="loading"></div>
 	<h3>File Opener</h3>
 	<input type="file" id="files" name="files[]" multiple />
 	<input type="text" ng-model="p.query" placeholder="filter" />
