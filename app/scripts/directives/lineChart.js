@@ -8,9 +8,16 @@ analyseApp.directive('lineChart', function() {
     },
     link: function postLink(scope, element, attrs) {
     	scope.$watch('data', function(){
-    		console.log(scope.data);
     		if (typeof scope.data != 'undefined'){
-	    		$.plot(element, scope.data, { yaxis: { max: 1 } });
+                var conf = {
+                    yaxis: {
+                        max: 5
+                    },
+                    xaxis: {
+                        mode: 'time'
+                    }
+                };
+	    		$.plot(element, scope.data, conf);
 	    	}
     	});
     }

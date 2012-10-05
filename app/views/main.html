@@ -1,4 +1,5 @@
 <div ng-controller="FileOpenerCtrl">
+	<div line-chart data="data" class="chart"></div>
 	<h3>File Opener</h3>
 	<input type="file" id="files" name="files[]" multiple />
 	<input type="text" ng-model="p.query" placeholder="filter" />
@@ -7,12 +8,11 @@
 	<input type="text" ng-model="p.subsetCount" placeholder="subset count" />
 	<input type="text" ng-model="p.subsetStart" placeholder="subset start" />
 	<input type="button" ng-click="drawChart()" value="Draw Chart" />
+
 	<ul>
   	<li ng-repeat="line in lines | filter:p.query | subset:p.subsetStart:p.subsetCount | highlight:p.dateSearch">
-  		<p><span class="date">{{getDate(line)|date}}</span> {{line}}</p>
+  		<p><span class="date">{{getDate(line)|date:'medium'}}</span> {{line}}</p>
   	</li>
 	</ul>
-	<div id="chart">
-	</div>
-	<div line-chart data="data" class="chart"></div>
+	
 </div>
