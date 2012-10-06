@@ -22,10 +22,6 @@ analyseApp.controller('FileOpenerCtrl', function($scope, userPrefs, $filter) {
     $scope.drawChart();
   });
 
-  $scope.tagLinesLength = function() {
-    return inTags($scope.lines, $scope.p.tags).length;
-  }
-
   $scope.minusTag = function() {
     if ($scope.p.tags.length > 1){
       $scope.p.tags.pop();

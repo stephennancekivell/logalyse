@@ -2,7 +2,10 @@
 
 analyseApp.directive('linesViewer', function() {
   return {
-    template: '<ul><li ng-repeat="line in pagedLines">{{line}}</li></ul>',
+    template: '<div>'
+              +'<input type="button" value="prev" ng-click="pageStart = pageStart-pageSize" />'
+              +'<input type="button" value="next" ng-click="pageStart = pageStart+pageSize" />'
+              +'<ul><li ng-repeat="line in pagedLines">{{line}}</li></ul></div>',
     restrict: 'E',
     scope: {
     	lines:'=',
@@ -11,7 +14,6 @@ analyseApp.directive('linesViewer', function() {
     },
     link: function postLink(scope, element, attrs) {
         var pageSize = parseInt(scope.pageSize);
-        var increment = 10;
     	
         scope.pagedLines = [];
         
@@ -21,25 +23,6 @@ analyseApp.directive('linesViewer', function() {
 
         scope.$watch('pageStart', function(){
             scope.pagedLines = scope.lines.slice(scope.pageStart, pageSize);
-            console.log('pageStart');
-        });
-
-        var eee = element;
-
-        var ul = element.children();
-
-        ul.bind('scroll', function() {
-            console.log('scroll');
-            if (ul[0].scrollTop + ul[0].offsetHeight >= ul[0].scrollHeight) {
-                if(scope.pageStart + increment < scope.lines.length){
-                    console.log('+', ul[0].scrollTop, ul[0].offsetHeight, ul[0].scrollHeight);
-                    scope.pageStart+=increment;
-                    ul[0].scrollTop=0;
-                    console.log('++', ul[0].scrollTop, ul[0].offsetHeight, ul[0].scrollHeight);
-                    scope.$digest();
-                    ul[0].scrollTop=0;
-                }
-            }
         });
     }
   };
