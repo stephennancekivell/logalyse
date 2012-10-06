@@ -3,17 +3,22 @@
 	<div class="loading" ng-show="loading"></div>
 	<h3>File Opener</h3>
 	<input type="file" id="files" name="files[]" multiple />
-	<input type="text" ng-model="p.query" placeholder="filter" />
+	<div class="tags">
+		<input type="text" ng-repeat="tag in p.tags" ng-model="p.tag">
+		<input type="button" ng-click="p.tags.push('')" value="+">
+		<input type="button" ng-click="minusTag()" value="-">
+	</div>
 	<input type="text" ng-model="p.dateSearch" placeholder="dateSearch" />
 	<input type="text" ng-model="p.dateFormat" placeholder="dateFormat" />
 	<input type="text" ng-model="p.subsetCount" placeholder="subset count" />
 	<input type="text" ng-model="p.subsetStart" placeholder="subset start" />
 	<input type="number" ng-model="p.groupBy" placeholder="groupBy" />
-	
+
 	<!-- <lines-viewer page-start="linesPageStart" page-size="50" lines="lines"></lines-viewer> -->
 
+	<h3>{{tagLinesLength()}}</h3>
 	<ul class="logLines">
-  	<li ng-repeat="line in lines | filter:p.query | subset:p.subsetStart:10 | highlight:p.dateSearch">
+  	<li ng-repeat="line in lines | inTags:p.tags | subset:p.subsetStart:10 | highlight:p.dateSearch">
   		<p><span class="date">{{getDate(line)|date:'medium'}}</span>{{line}}</p>
   	</li>
 	</ul>

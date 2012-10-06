@@ -1,24 +1,36 @@
 'use strict';
 
-analyseApp.controller('FileOpenerCtrl', function($scope, userPrefs) {
+analyseApp.controller('FileOpenerCtrl', function($scope, userPrefs, $filter) {
   $scope.lines = ['Sep 30 23:17:01 stephen-ThinkPad-T520 CRON[13174]: pam_unix(cron:session): session closed for user root'];
   $scope.data = [];
   $scope.loading = true;
   $scope.linesPageStart = 0;
 
+  var inTags = $filter('inTags');
+
   $scope.p = userPrefs.get();
 
-  $scope.$watch('p', function(){
+  $scope.$watch('p', function() {
     userPrefs.put($scope.p);
-  },true);
+  }, true);
 
-  $scope.$watch('p', function(){
+  $scope.$watch('p', function() {
     $scope.drawChart();
   }, true);
 
-  $scope.$watch('lines', function(){
+  $scope.$watch('lines', function() {
     $scope.drawChart();
   });
+
+  $scope.tagLinesLength = function() {
+    return inTags($scope.lines, $scope.p.tags).length;
+  }
+
+  $scope.minusTag = function() {
+    if ($scope.p.tags.length > 1){
+      $scope.p.tags.pop();
+    }
+  }
   
 	function handleFileSelect(evt) {
     var files = evt.target.files; // FileList object
@@ -49,7 +61,7 @@ analyseApp.controller('FileOpenerCtrl', function($scope, userPrefs) {
   }
 
   $scope.drawChart = function(){
-    var lines = _.filter($scope.lines, function(line){return line.indexOf($scope.p.query) != -1;});
+    var lines = inTags($scope.lines, $scope.p.tags);
     $scope.data = $.map(subset(lines), function(line){
   		return {date:$scope.getDate(line),count:0};
   	});
