@@ -11,13 +11,24 @@ describe('Filter: inTags', function() {
     inTags = $filter('inTags');
   }));
 
-  it('should return the input prefixed with "inTags filter:"', function() {
+  it('should return the filtered input.', function() {
     var lines = ['a','b'];
     var tags = ['a'];
 
     var answer = inTags(lines, tags);
+    console.log('answer',answer);
     
     expect(answer.length).toBe(1);
     expect(answer[0]).toBe('a');
+  });
+
+  it('shouldnt let anything through', function(){
+    var lines = ['a','b'];
+    var tags = [];
+
+    var answer = inTags(lines, tags);
+    console.log('answer',answer);
+    
+    expect(answer.length).toBe(0);
   });
 });

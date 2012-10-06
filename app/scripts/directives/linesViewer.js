@@ -24,8 +24,6 @@ analyseApp.directive('linesViewer', function() {
             console.log('pageStart');
         });
 
-        var raw = element[0];
-
         var eee = element;
 
         var ul = element.children();
@@ -33,9 +31,7 @@ analyseApp.directive('linesViewer', function() {
         ul.bind('scroll', function() {
             console.log('scroll');
             if (ul[0].scrollTop + ul[0].offsetHeight >= ul[0].scrollHeight) {
-
                 if(scope.pageStart + increment < scope.lines.length){
-
                     console.log('+', ul[0].scrollTop, ul[0].offsetHeight, ul[0].scrollHeight);
                     scope.pageStart+=increment;
                     ul[0].scrollTop=0;
@@ -45,11 +41,6 @@ analyseApp.directive('linesViewer', function() {
                 }
             }
         });
-
-    	// element.children().bind('scroll', function(e) {
-    	// 	scope.pageStart += 1;
-    	// 	element.children().scrollTop =0;
-	    // });
     }
   };
 });

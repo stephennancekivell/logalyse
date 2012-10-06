@@ -4,7 +4,7 @@
 	<h3>File Opener</h3>
 	<input type="file" id="files" name="files[]" multiple />
 	<div class="tags">
-		<input type="text" ng-repeat="tag in p.tags" ng-model="p.tag">
+		<input type="text" ng-repeat="tag in p.tags" ng-model="p.tags[$index]">
 		<input type="button" ng-click="p.tags.push('')" value="+">
 		<input type="button" ng-click="minusTag()" value="-">
 	</div>
