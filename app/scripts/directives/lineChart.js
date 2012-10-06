@@ -10,6 +10,8 @@ analyseApp.directive('lineChart', function() {
     	scope.$watch('data', function(){
     		if (typeof scope.data != 'undefined'){
                 var conf = {
+                    points: { show : true },
+                    lines: { show: true },
                     xaxis: {
                         mode: 'time'
                     }
