@@ -9,10 +9,11 @@
 	<input type="text" ng-model="p.subsetCount" placeholder="subset count" />
 	<input type="text" ng-model="p.subsetStart" placeholder="subset start" />
 	<input type="number" ng-model="p.groupBy" placeholder="groupBy" />
-	<input type="button" ng-click="drawChart()" value="Draw Chart" />
+	
+	<!-- <lines-viewer page-start="linesPageStart" page-size="50" lines="lines"></lines-viewer> -->
 
 	<ul class="logLines">
-  	<li ng-repeat="line in lines | filter:p.query | subset:p.subsetStart:p.subsetCount | highlight:p.dateSearch">
+  	<li ng-repeat="line in lines | filter:p.query | subset:p.subsetStart:10 | highlight:p.dateSearch">
   		<p><span class="date">{{getDate(line)|date:'medium'}}</span>{{line}}</p>
   	</li>
 	</ul>

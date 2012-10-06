@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Directive: lineChart', function() {
+xdescribe('Directive: lineChart', function() {
   beforeEach(module('analyseApp'));
 
   var element;

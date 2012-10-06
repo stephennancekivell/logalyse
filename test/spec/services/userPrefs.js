@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Service: userPrefs', function () {
+xdescribe('Service: userPrefs', function () {
 
   // load the service's module
   beforeEach(module('analyseApp'));

@@ -4,6 +4,7 @@ analyseApp.controller('FileOpenerCtrl', function($scope, userPrefs) {
   $scope.lines = ['Sep 30 23:17:01 stephen-ThinkPad-T520 CRON[13174]: pam_unix(cron:session): session closed for user root'];
   $scope.data = [];
   $scope.loading = true;
+  $scope.linesPageStart = 0;
 
   $scope.p = userPrefs.get();
 

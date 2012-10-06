@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Filter: subset', function() {
+xdescribe('Filter: subset', function() {
 
   // load the filter's module
   beforeEach(module('analyseApp'));

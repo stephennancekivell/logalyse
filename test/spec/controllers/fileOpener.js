@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: FileOpenerCtrl', function() {
+xdescribe('Controller: FileOpenerCtrl', function() {
 
   // load the controller's module
   beforeEach(module('analyseApp'));

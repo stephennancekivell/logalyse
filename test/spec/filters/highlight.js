@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Filter: highlight', function() {
+xdescribe('Filter: highlight', function() {
 
   // load the filter's module
   beforeEach(module('analyseApp'));

@@ -1,6 +1,4 @@
 ==analyse==
-
-
 Chart different tags in a log file.
 
 Chart amount of lines per hour/day/month. _.groupBy
