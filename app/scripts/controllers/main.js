@@ -10,7 +10,7 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter',function($sco
 
   $scope.p = userPrefs.get();
   if ($scope.p == null){
-    $scope.p = {"subsetStart":"0","subsetCount":"1000","dateSearch":"\\w+\\s+\\d+\\s+\\d+:\\d+","dateFormat":"MMM +d +HH:mm","groupBy":1,"tags":[{values:""}]};
+    $scope.p = {"subsetStart":"0","subsetCount":"1000","dateSearch":"\\w+\\s+\\d+\\s+\\d+:\\d+","dateFormat":"MMM +d +HH:mm","tags":[{values:""}]};
   }
 
   $scope.$watch('p', function() {
@@ -49,12 +49,8 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter',function($sco
 
       data = _.filter(data, function(d){return d.date != null});
 
-      if ($scope.p.groupBy === 0) {
-        console.warn('groupBy is 0, divide by 0 is undefined');
-      }
-
       data = _.groupBy(data, function(o){
-        return Math.floor(o.date.getTime() / $scope.p.groupBy);
+        return Math.floor(o.date.getTime());
       });
 
       data = _.toArray(data);
@@ -65,7 +61,7 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter',function($sco
       
       data = _.sortBy(data, function(d){return d[0]});
 
-      return {data:data,label:tag.value,clickable:true};
+      return {data:data, label:tag.value, clickable:true};
     });
 
     $scope.$on('plotclick',function(e){
