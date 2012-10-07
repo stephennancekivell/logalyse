@@ -58,7 +58,7 @@ analyseApp.controller('FileOpenerCtrl', function($scope, userPrefs, $filter) {
 
   $scope.drawChart = function(){
     var lines = inTags($scope.lines, $scope.p.tags);
-    $scope.data = $.map(subset(lines), function(line){
+    $scope.data = $.map(lines, function(line){
   		return {date:$scope.getDate(line),count:0};
   	});
 

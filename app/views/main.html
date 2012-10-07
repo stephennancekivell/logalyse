@@ -15,9 +15,7 @@
 	<input type="number" ng-model="p.groupBy" placeholder="groupBy" />
 
 	<h3>{{tagLinesLength()}}</h3>
-	<lines-viewer page-start="linesPageStart" page-size="50" lines="lines" tags="p.tags"></lines-viewer>
 
-	
 	<ul class="logLines">
   	<li ng-repeat="line in lines | inTags:p.tags | subset:p.subsetStart:10 | highlight:p.dateSearch">
   		<p><span class="date">{{getDate(line)|date:'medium'}}</span>{{line}}</p>
