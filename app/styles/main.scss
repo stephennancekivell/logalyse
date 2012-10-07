@@ -1,12 +1,14 @@
 /* Will be compiled down to a single stylesheet with your sass files */
 
+@import "compass_twitter_bootstrap";
+
 .date{
 	background-color:lightblue;
 }
 
 .chart {
 	width: 80%;
-	height: 200px;
+	height: 300px;
 	margin-left: auto;
 	margin-right: auto;
 }

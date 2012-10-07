@@ -1,25 +1,39 @@
 <div ng-controller="MainCtrl">
-	<div line-chart data="data" class="chart"></div>
-	<!-- <div class="loading" ng-show="loading"></div> -->
-	<h3>File Opener</h3>
-	<file-loader lines="lines"></file-loader>
-	<div class="tags">
-		<input type="text" ng-repeat="tag in p.tags" ng-model="p.tags[$index]">
-		<input type="button" ng-click="p.tags.push('')" value="+">
-		<input type="button" ng-click="minusTag()" value="-">
+	<file-loader lines="lines" class="pull-left"></file-loader>
+	<div class="container">
+		<div class="row">
+			<div line-chart data="data" class="chart span6"></div>
+
+			<div class="tags span2">
+				<h4>Tags</h4>
+				<input type="text" ng-repeat="tag in p.tags" ng-model="p.tags[$index]">
+				<input type="button" ng-click="p.tags.push('')" value="+">
+				<input type="button" ng-click="minusTag()" value="-">
+			</div>
+		</div>
+
+		<div class="row">
+			<a ng-click="p.settings.expanded=!p.settings.expanded">Settings</a>
+			<div ng-class="{true: 'in', false:''}[p.settings.expanded]" class="settings collapse">
+				
+				<div class="dateFormat">
+					<input type="text" ng-model="p.dateSearch" placeholder="dateSearch" />
+					<input type="text" ng-model="p.dateFormat" placeholder="dateFormat" />
+				</div>
+				<input type="text" ng-model="p.subsetCount" placeholder="subset count" />
+				<input type="text" ng-model="p.subsetStart" placeholder="subset start" />
+				<input type="number" ng-model="p.groupBy" placeholder="groupBy" />
+			</div>
+		</div>
+
+		<div class="row">
+			<h3>{{tagLinesLength()}}</h3>
+
+			<ul class="logLines">
+		  	<li ng-repeat="line in lines | inTags:p.tags | subset:p.subsetStart:10 ">
+		  		<p><span class="date">{{getDate(line)|date:'medium'}}</span>{{line}}</p>
+		  	</li>
+			</ul>
+		</div>
 	</div>
-	<input type="text" ng-model="p.dateSearch" placeholder="dateSearch" />
-	<input type="text" ng-model="p.dateFormat" placeholder="dateFormat" />
-	<input type="text" ng-model="p.subsetCount" placeholder="subset count" />
-	<input type="text" ng-model="p.subsetStart" placeholder="subset start" />
-	<input type="number" ng-model="p.groupBy" placeholder="groupBy" />
-
-	<h3>{{tagLinesLength()}}</h3>
-
-	<ul class="logLines">
-  	<li ng-repeat="line in lines | inTags:p.tags | subset:p.subsetStart:10 ">
-  		<p><span class="date">{{getDate(line)|date:'medium'}}</span>{{line}}</p>
-  	</li>
-	</ul>
-	
 </div>
