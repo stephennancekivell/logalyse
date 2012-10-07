@@ -10,7 +10,7 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter',function($sco
 
   $scope.p = userPrefs.get();
   if ($scope.p == null){
-    $scope.p = {"subsetStart":"0","subsetCount":"1000","dateSearch":"\\w+\\s+\\d+\\s+\\d+:\\d+","dateFormat":"MMM +d +HH:mm","groupBy":1,"tags":[""]};
+    $scope.p = {"subsetStart":"0","subsetCount":"1000","dateSearch":"\\w+\\s+\\d+\\s+\\d+:\\d+","dateFormat":"MMM +d +HH:mm","groupBy":1,"tags":[{}]};
   }
 
   $scope.$watch('p', function() {
@@ -21,12 +21,6 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter',function($sco
   $scope.$watch('[p, lines]', function() {
     $scope.drawChart();
   },true);
-
-  $scope.minusTag = function() {
-    if ($scope.p.tags.length > 1){
-      $scope.p.tags.pop();
-    }
-  }
   
   $scope.getDate = function(line) {
     try {
@@ -46,7 +40,7 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter',function($sco
     var lines = inTags($scope.lines, $scope.p.tags);
 
     $scope.data =  $.map($scope.p.tags, function(tag){
-      var tlines = _.filter(lines, function(line){ return (line.indexOf(tag) != -1); });
+      var tlines = _.filter(lines, function(line){ return (line.indexOf(tag.value) != -1); });
 
       var data = $.map(tlines, function(line){
         return {date:$scope.getDate(line),count:0};

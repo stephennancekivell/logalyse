@@ -18,7 +18,7 @@ describe('Controller: MainCtrl', function() {
 
   beforeEach(function(){
     scope.p = {
-        tags : ['nvidia'],
+        tags : [{value:'nvidia'}],
         dateSearch: '\\w+\\s+\\d+\\s+\\d+:\\d+',
         dateFormat: 'MMM +d +HH:mm',
         groupBy: 1
@@ -37,7 +37,7 @@ describe('Controller: MainCtrl', function() {
   });
 
   it('should ignore lines that dont match a tag.', function() {
-    scope.p.tags = ['notThat'];
+    scope.p.tags = [{value:'notThat'}];
     scope.lines = [
       'Oct 7 13:03:10 stephen-ThinkPad-T520 kernel: [ 7414.713167] nvidia 0000:01:00.0: restoring config space at offset 0x4 (was 0x0, writing 0xf0000000)',    
       'Oct 7 13:03:10 stephen-ThinkPad-T520 kernel: [ 7414.713167] nvidia 0000:01:00.0: restoring config space at offset 0x4 (was 0x0, writing 0xf0000000)'];
@@ -48,7 +48,7 @@ describe('Controller: MainCtrl', function() {
   });
 
   it('should graph each tag as a different line', function(){
-    scope.p.tags = ['nvidia','cron'];
+    scope.p.tags = [{value:'nvidia'},{value:'cron'}];
     scope.lines = [
       'Oct 7 13:03:10 stephen-ThinkPad-T520 kernel: [ 7414.713167] nvidia 0000:01:00.0: restoring config space at offset 0x4 (was 0x0, writing 0xf0000000)',    
       'Oct 7 13:03:10 stephen-ThinkPad-T520 kernel: [ 7414.713167] cron 0000:01:00.0: restoring config space at offset 0x4 (was 0x0, writing 0xf0000000)',
