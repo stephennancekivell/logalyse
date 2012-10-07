@@ -65,9 +65,11 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter',function($sco
       
       data = _.sortBy(data, function(d){return d[0]});
 
-      return {data:data,label:tag.value};
+      return {data:data,label:tag.value,clickable:true};
     });
 
-
+    $scope.$on('plotclick',function(e){
+      console.log(arguments);
+    });
   }
 }]);
