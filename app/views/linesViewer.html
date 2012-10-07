@@ -1,0 +1,14 @@
+<h1>Lines Viewer</h1>
+<ul class="logLines" ng-controller="LinesViewerCtrl">
+	<li ng-repeat="line in pLines">
+		<p><span class="date">{{getDate(line)|date:'medium'}}</span>{{line}}</p>
+	</li>
+</ul>
+<ul class="pager">
+  <li class="previous" ng-class="{true:'.disabled',false:''}[paginationStart==0]">
+    <a href="#">&larr; Older</a>
+  </li>
+  <li class="next">
+    <a href="#">Newer &rarr;</a>
+  </li>
+</ul>

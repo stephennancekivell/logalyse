@@ -38,10 +38,19 @@
 
 		<div class="row">
 			<ul class="logLines">
-		  	<li ng-repeat="line in lines | inTags:p.tags | subset:p.subsetStart:10 ">
+		  	<li ng-repeat="line in lines | inTags:p.tags | subset:p.subsetStart:10 |highlight:p.dateSearch">
 		  		<p id="line{{$index}}"><span class="date">{{getDate(line)|date:'medium'}}</span>{{line}}</p>
 		  	</li>
 			</ul>
+			<ul class="pager">
+			  <li class="previous" ng-class="{true:'.disabled',false:''}[p.subsetStart==0]">
+			    <a href="#">&larr; Older</a>
+			  </li>
+			  <li class="next">
+			    <a href="#">Newer &rarr;</a>
+			  </li>
+			</ul>
 		</div>
+		<div class="row" ng-include="views/linesViewer.html"></div>
 	</div>
 </div>
