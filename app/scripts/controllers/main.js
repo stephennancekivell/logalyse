@@ -44,23 +44,34 @@ analyseApp.controller('MainCtrl', function($scope, userPrefs, $filter) {
 
   $scope.drawChart = function(){
     var lines = inTags($scope.lines, $scope.p.tags);
-    $scope.data = $.map(lines, function(line){
-  		return {date:$scope.getDate(line),count:0};
-  	});
 
-    $scope.data = _.filter($scope.data, function(d){return d.date != null});
+    $scope.data =  $.map($scope.p.tags, function(tag){
+      var tlines = _.filter(lines, function(line){ return (line.indexOf(tag) != -1); });
 
-    $scope.data = _.groupBy($scope.data, function(o){
-      return Math.floor(o.date.getTime() / $scope.p.groupBy);
+      var data = $.map(tlines, function(line){
+        return {date:$scope.getDate(line),count:0};
+      });
+
+
+      data = _.filter(data, function(d){return d.date != null});
+
+      if ($scope.p.groupBy === 0) {
+        console.warn('groupBy is 0, divide by 0 is undefined');
+      }
+
+      data = _.groupBy(data, function(o){
+        return Math.floor(o.date.getTime() / $scope.p.groupBy);
+      });
+
+      data = _.toArray(data);
+
+      data = $.map(data, function(a){
+        return [[a[0].date.getTime(), a.length]];
+      });
+      
+      data = _.sortBy(data, function(d){return d[0]});
+
+      return [data];
     });
-
-    $scope.data = _.toArray($scope.data);
-
-    $scope.data = $.map($scope.data, function(a){
-      return [[a[0].date.getTime(), a.length]];
-    });
-    $scope.data = _.sortBy($scope.data, function(d){return d[0]});
-    $scope.data = [$scope.data];
-    console.log('end drawChart', $scope.data);
   }
 });
