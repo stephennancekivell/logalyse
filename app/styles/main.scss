@@ -13,20 +13,21 @@ body{
 		}
 	}
 
-	.chart {
-		width: 80%;
-		height: 300px;
-		margin-left: auto;
-		margin-right: auto;
-	}
-
 	.MainCtrl {
 		padding:20px;
-	}
-
-	.tags{
-		input[type="text"] {
-			width: 100px;
+		.chart {
+			width: 80%;
+			height: 300px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		.tags{
+			input[type="text"] {
+				width: 100px;
+			}
+		}
+		.logLines ul {
+			list-style: none;
 		}
 	}
 }
