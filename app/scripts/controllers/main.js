@@ -17,13 +17,10 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter',function($sco
     userPrefs.put($scope.p);
   }, true);
 
-  $scope.$watch('p', function() {
-    $scope.drawChart();
-  }, true);
 
-  $scope.$watch('lines', function() {
+  $scope.$watch('[p, lines]', function() {
     $scope.drawChart();
-  });
+  },true);
 
   $scope.minusTag = function() {
     if ($scope.p.tags.length > 1){

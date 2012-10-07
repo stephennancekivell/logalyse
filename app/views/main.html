@@ -6,10 +6,15 @@
 
 			<div class="tags span2">
 				<h4>Tags</h4>
-				<input type="text" ng-repeat="tag in p.tags" ng-model="p.tags[$index]">
+				<ul>
+					<li ng-repeat="tag in p.tags">
+						<input type="text"  ng-model="p.tags[$index]">
+					</li>
+				</ul>
 				<input type="button" ng-click="p.tags.push('')" value="+">
 				<input type="button" ng-click="minusTag()" value="-">
 			</div>
+			<input type="button" class="btn btn-primary" ng-click="drawChart()" value="drawChart" />
 		</div>
 
 		<div class="row">
