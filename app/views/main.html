@@ -39,7 +39,7 @@
 		<div class="row">
 			<ul class="logLines">
 		  	<li ng-repeat="line in lines | inTags:p.tags | subset:p.subsetStart:10 ">
-		  		<p><span class="date">{{getDate(line)|date:'medium'}}</span>{{line}}</p>
+		  		<p id="line{{$index}}"><span class="date">{{getDate(line)|date:'medium'}}</span>{{line}}</p>
 		  	</li>
 			</ul>
 		</div>

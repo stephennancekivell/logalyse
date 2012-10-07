@@ -12,9 +12,7 @@ analyseApp.directive('lineChart', function() {
                 var conf = {
                     points: { show : true },
                     lines: { show: true },
-                    xaxis: {
-                        mode: 'time'
-                    }
+                    xaxis: { mode: 'time'},
                 };
 	    		$.plot(element, scope.data, conf);
 	    	}

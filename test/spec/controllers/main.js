@@ -31,9 +31,10 @@ describe('Controller: MainCtrl', function() {
       'Oct 7 13:03:10 stephen-ThinkPad-T520 kernel: [ 7414.713167] nvidia 0000:01:00.0: restoring config space at offset 0x4 (was 0x0, writing 0xf0000000)',
       'Oct 8 14:04:10 stephen-ThinkPad-T520 kernel: [ 7414.713167] nvidia 0000:01:00.0: restoring config space at offset 0x4 (was 0x0, writing 0xf0000000)'];
     
-    scope.drawChart()
+    scope.drawChart();
 
-    expect(scope.data).toEqual([[[1349568180000,2],[1349658240000,1]]]);
+    expect(scope.data.length).toBe(1);
+    expect(scope.data[0].data).toEqual([[1349568180000,2],[1349658240000,1]]);
   });
 
   it('should ignore lines that dont match a tag.', function() {
@@ -42,9 +43,9 @@ describe('Controller: MainCtrl', function() {
       'Oct 7 13:03:10 stephen-ThinkPad-T520 kernel: [ 7414.713167] nvidia 0000:01:00.0: restoring config space at offset 0x4 (was 0x0, writing 0xf0000000)',    
       'Oct 7 13:03:10 stephen-ThinkPad-T520 kernel: [ 7414.713167] nvidia 0000:01:00.0: restoring config space at offset 0x4 (was 0x0, writing 0xf0000000)'];
     
-    scope.drawChart()
+    scope.drawChart();
 
-    expect(scope.data).toEqual([[]]);
+    expect(scope.data[0].data).toEqual([]);
   });
 
   it('should graph each tag as a different line', function(){
@@ -54,9 +55,11 @@ describe('Controller: MainCtrl', function() {
       'Oct 7 13:03:10 stephen-ThinkPad-T520 kernel: [ 7414.713167] cron 0000:01:00.0: restoring config space at offset 0x4 (was 0x0, writing 0xf0000000)',
       'Oct 8 14:04:10 stephen-ThinkPad-T520 kernel: [ 7414.713167] nvidia 0000:01:00.0: restoring config space at offset 0x4 (was 0x0, writing 0xf0000000)'];
     
-    scope.drawChart()
+    scope.drawChart();
 
-    expect(scope.data).toEqual([[[1349568180000,1],[1349658240000,1]],[[1349568180000,1]]]);
-
+    expect(scope.data.length).toBe(2);
+    //order not important
+    expect(scope.data[0].data).toEqual([[1349568180000,1],[1349658240000,1]]);
+    expect(scope.data[1].data).toEqual([[1349568180000,1]]);
   });
 });

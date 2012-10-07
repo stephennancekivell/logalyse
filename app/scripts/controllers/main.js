@@ -27,7 +27,7 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter',function($sco
     	var dateString = line.match(new RegExp($scope.p.dateSearch, "i"))[0];
     	return Date.parseExact(dateString, $scope.p.dateFormat);
     } catch(e){
-      console.log('return null');
+      console.log('error parsing date');
       return null;
     }
   }
@@ -65,7 +65,9 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter',function($sco
       
       data = _.sortBy(data, function(d){return d[0]});
 
-      return [data];
+      return {data:data,label:tag.value};
     });
+
+
   }
 }]);
