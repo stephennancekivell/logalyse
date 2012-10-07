@@ -28,20 +28,6 @@ analyseApp.controller('FileOpenerCtrl', function($scope, userPrefs, $filter) {
     }
   }
   
-	function handleFileSelect(evt) {
-    var files = evt.target.files; // FileList object
-
-    var reader = new FileReader();
-
-    reader.onload = function(e){
-    	$scope.lines = e.target.result.split('\n');
-    	$scope.$digest();
-    }
-
-    reader.readAsText(files[0]);
-  }
-  document.getElementById('files').addEventListener('change', handleFileSelect, false);
-
   $scope.getDate = function(line) {
     try {
     	var dateString = line.match(new RegExp($scope.p.dateSearch, "i"))[0];

@@ -17,3 +17,13 @@ Loading icon.
 login. beta testers.
 Sharing, dont need to login. Upload settings etc.
 Search for tags, formats, privacy around that.
+
+shouldnt need date fromat and date search.
+date search can be interpereted from the date format.
+as MMM -> \w{3,3} or \w+
+
+Do i want a service. that takes lines, settings and spits out the chart able stuff.
+	No the chart should do that.
+	Chart directive.
+
+The file loader could be a seperate thing, maybe broadcasting. Directive, with a param for the text.

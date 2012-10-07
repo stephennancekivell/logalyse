@@ -2,7 +2,7 @@
 	<div line-chart data="data" class="chart"></div>
 	<div class="loading" ng-show="loading"></div>
 	<h3>File Opener</h3>
-	<input type="file" id="files" name="files[]" multiple />
+	<file-loader lines="lines"></file-loader>
 	<div class="tags">
 		<input type="text" ng-repeat="tag in p.tags" ng-model="p.tags[$index]">
 		<input type="button" ng-click="p.tags.push('')" value="+">
@@ -17,8 +17,9 @@
 	<h3>{{tagLinesLength()}}</h3>
 
 	<ul class="logLines">
-  	<li ng-repeat="line in lines | inTags:p.tags | subset:p.subsetStart:10 | highlight:p.dateSearch">
+  	<li ng-repeat="line in lines | inTags:p.tags | subset:p.subsetStart:10 ">
   		<p><span class="date">{{getDate(line)|date:'medium'}}</span>{{line}}</p>
+  		<p>{{line}}</p>
   	</li>
 	</ul>
 	
