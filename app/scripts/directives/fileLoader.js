@@ -2,7 +2,7 @@
 
 analyseApp.directive('fileLoader', function() {
   return {
-    template: '<div><input type="file" id="files" name="files[]" multiple /></div>',
+    template: '<div><input type="file" name="files[]"/></div>',
     restrict: 'E',
     scope: {
     	lines:'=',
