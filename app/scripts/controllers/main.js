@@ -1,6 +1,6 @@
 'use strict';
 
-analyseApp.controller('MainCtrl', function($scope, userPrefs, $filter) {
+analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter',function($scope, userPrefs, $filter) {
   $scope.lines = ['Sep 30 23:17:01 stephen-ThinkPad-T520 CRON[13174]: pam_unix(cron:session): session closed for user root'];
   $scope.data = [];
   $scope.loading = true;
@@ -9,6 +9,9 @@ analyseApp.controller('MainCtrl', function($scope, userPrefs, $filter) {
   var inTags = $filter('inTags');
 
   $scope.p = userPrefs.get();
+  if ($scope.p == null){
+    $scope.p = {"subsetStart":"0","subsetCount":"1000","dateSearch":"\\w+\\s+\\d+\\s+\\d+:\\d+","dateFormat":"MMM +d +HH:mm","groupBy":1,"tags":[""]};
+  }
 
   $scope.$watch('p', function() {
     userPrefs.put($scope.p);
@@ -74,4 +77,4 @@ analyseApp.controller('MainCtrl', function($scope, userPrefs, $filter) {
       return [data];
     });
   }
-});
+}]);

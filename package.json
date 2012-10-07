@@ -1,7 +1,8 @@
 {
-  "author": "",
-  "name": "",
-  "version": "0.0.0",
-  "dependencies": {},
+  "author": "Stephen Nancekivell",
+  "name": "analyse",
+  "version": "0.0.1",
+  "dependencies": {
+  	},
   "devDependencies": {}
 }
