@@ -5,6 +5,12 @@
 	</li>
 </ul>
 <ul class="pager">
+	<!-- <ul class="logLines">
+  	<li ng-repeat="line in parent.lines | subset:paginationStart:paginationStart+10">
+  		<p id="line{{$index}}">{{line}}</p>
+  	</li>
+	</ul> -->
+
   <li class="previous" ng-class="{true:'.disabled',false:''}[paginationStart==0]">
     <a href="#">&larr; Older</a>
   </li>

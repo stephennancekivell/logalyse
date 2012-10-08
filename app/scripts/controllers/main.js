@@ -5,6 +5,8 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter',function($sco
   $scope.data = [];
   $scope.loading = true;
   $scope.linesPageStart = 0;
+  $scope.paginationStart=0;
+  $scope.paginationSize=10;
 
   var inTags = $filter('inTags');
 
@@ -32,8 +34,8 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter',function($sco
     }
   }
 
-  function subset(line) {
-    return line.slice(parseInt($scope.p.subsetStart), parseInt($scope.p.subsetStart)+parseInt($scope.p.subsetCount));
+  function subset(lines) {
+    return lines.slice(parseInt($scope.p.subsetStart), parseInt($scope.p.subsetStart)+parseInt($scope.p.subsetCount));
   }
 
   $scope.drawChart = function(){
@@ -45,7 +47,7 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter',function($sco
       }
     });
 
-    var lines = _.filter($scope.lines, function(line){
+    var lines = _.filter(subset($scope.lines), function(line){
       var isTag = $.map(tags, function(tag){
         return (line.indexOf(tag.value) != -1);
       });
