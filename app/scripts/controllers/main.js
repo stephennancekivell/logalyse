@@ -37,9 +37,24 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter',function($sco
   }
 
   $scope.drawChart = function(){
-    var lines = inTags($scope.lines, $scope.p.tags);
+    var tags = _.filter($scope.p.tags, function(tag){
+      if (typeof tag.plot != 'undefined'){
+        return tag.plot;
+      } else {
+        return true;
+      }
+    });
 
-    $scope.data =  $.map($scope.p.tags, function(tag){
+    var lines = _.filter($scope.lines, function(line){
+      var isTag = $.map(tags, function(tag){
+        return (line.indexOf(tag.value) != -1);
+      });
+      return _.reduce(isTag, function(a,b){
+        return (a | b);
+      }, false);
+    });
+
+    $scope.data =  $.map(tags, function(tag){
       var tlines = _.filter(lines, function(line){ return (line.indexOf(tag.value) != -1); });
 
       var data = $.map(tlines, function(line){

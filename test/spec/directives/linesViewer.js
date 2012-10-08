@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Directive: linesViewer', function() {
+xdescribe('Directive: linesViewer', function() {
   beforeEach(module('analyseApp'));
 
   var element, scope;

@@ -5,20 +5,22 @@
 			<div line-chart data="data" class="chart span6"></div>
 
 			<div class="tags span2">
+				<h4>Tags</h4>
 				<table>
-					<tr>
-						<td>
-							<h4>Tags</h4>
-						</td>
-						<td>
-							<input type="button" class="btn" ng-click="p.tags.push({})" value="add" />
-						</td>
-					</tr>
+						<tr>
+							<th></th>
+							<th>plot</th>
+							<th>view</th>
+							<th></th>
+						</tr>
 					<tr ng-repeat="tag in p.tags">
 						<td><input type="text" class="" ng-model="tag.value" /></td>
+						<td><input type="checkbox" ng-model="tag.plot"></td>
+						<td><input type="checkbox" ng-model="tag.view"></td>
 						<td><a ng-click="p.tags.splice($index, $index+1)" href="#">[x]</a></td>
 					</tr>
 				</table>
+				<input type="button" class="btn" ng-click="p.tags.push({plot:true,view:true})" value="add" />
 			</div>
 		</div>
 
@@ -37,7 +39,7 @@
 
 		<div class="row">
 			<ul class="logLines">
-		  	<li ng-repeat="line in lines | inTags:p.tags | subset:p.subsetStart:10 |highlight:p.dateSearch">
+		  	<li ng-repeat="line in lines | viewTagedLines:p.tags | subset:p.subsetStart:10 |highlight:p.dateSearch">
 		  		<p id="line{{$index}}"><span class="date">{{getDate(line)|date:'medium'}}</span>{{line}}</p>
 		  	</li>
 			</ul>
