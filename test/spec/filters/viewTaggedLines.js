@@ -25,4 +25,12 @@ describe('Filter: viewTaggedLines', function() {
 
     expect(viewTaggedLines(lines,tags)).toEqual([]);
   });
+
+  it('should show all when showAll', function(){
+    var lines = ['a','b','c'];
+    var tags = [{value:'a',plot:true,view:true},
+                {value:'b',plot:true,view:false}];
+
+    expect(viewTaggedLines(lines,tags,true)).toEqual(['a','b','c']);
+  });
 });
