@@ -12,7 +12,7 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter',function($sco
 
   $scope.p = userPrefs.get();
   if ($scope.p == null){
-    $scope.p = {"subsetStart":"0","subsetCount":"1000","dateSearch":"\\w+\\s+\\d+\\s+\\d+:\\d+","dateFormat":"MMM +d +HH:mm","tags":[{values:""}]};
+    $scope.p = {"showAll":true,"subsetStart":"0","subsetCount":"1000","dateSearch":"\\w+\\s+\\d+\\s+\\d+:\\d+","dateFormat":"MMM +d +HH:mm","tags":[{values:""}]};
   }
 
   $scope.$watch('p', function() {
