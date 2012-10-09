@@ -1,7 +1,7 @@
 'use strict';
 
 // Declare app level module which depends on filters, and services
-var analyseApp = angular.module('analyseApp', [])
+var analyseApp = angular.module('analyseApp', ['ui'])
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider
       .when('/', {
