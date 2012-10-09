@@ -7,6 +7,7 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter',function($sco
   $scope.linesPageStart = 0;
   $scope.paginationStart=0;
   $scope.paginationSize=10;
+  $scope.pause = false;
 
   var inTags = $filter('inTags');
 
@@ -20,8 +21,10 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter',function($sco
   }, true);
 
 
-  $scope.$watch('[p, lines]', function() {
-    $scope.drawChart();
+  $scope.$watch('[p, lines, pause]', function() {
+    if ($scope.pause === false){
+      $scope.drawChart();
+    }
   },true);
   
   $scope.getDate = function(line) {

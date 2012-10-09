@@ -29,14 +29,22 @@
 		</div>
 
 		<div class="row">
-			<a ng-click="p.settings.expanded=!p.settings.expanded">Settings</a>
-			<div ng-class="{true: 'in', false:''}[p.settings.expanded]" class="settings collapse ">
+
+			<input type="button" value="settings" class="btn" ng-click="modalShown=true;pause=true;">
+			<label class="checkbox">
+				<input type="checkbox" ng-model="pause" value="pause" /> Pause loading.
+			</label>
+			
+			
+			<div ui-modal class="settings fade" ng-model="modalShown">
+				<div>
+				<a ng-click="modalShown=false;pause=false;">close</a>
 				<div class="hero-unit">
 					<div class="dateFormat">
 						<label>dateSearch</label>
 						<input type="text" ng-model="p.dateSearch" placeholder="dateSearch" />
 						<label>dateFormat</label>
-						<input type="text" ng-model="p.dateFormat" placeholder="dateFormat" />
+						<input type="text" ng-model="p.dateFormat" placeholder="dateFormat" /><i class="icon-warning-sign" />
 						<h4>format</h4>
 						<p>{{getDate(lines[paginationStart])|date:'short'}}</p>
 							<li ng-repeat="line in lines | viewTaggedLines:p.tags:p.showAll | subset:paginationStart:2 | highlight:p.dateSearch">
@@ -69,13 +77,4 @@
 			</ul>
 		</div>
 	</div>
-
-
-<div ui-modal class="fade" ng-model="modalShown" id="myModal">
-	<div>
-	  Cool, a modal dialog! yippie!
-	  <a ng-click="modalShown=false">Close 2</a>
-	</div>
-</div>
-<a ng-click="modalShown=true">Open 1</a>
 </div>
