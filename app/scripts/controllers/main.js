@@ -1,13 +1,12 @@
 'use strict';
 
 analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter',function($scope, userPrefs, $filter) {
-  $scope.lines = ['Sep 30 23:17:01 stephen-ThinkPad-T520 CRON[13174]: pam_unix(cron:session): session closed for user root'];
-  $scope.data = [];
   $scope.loading = true;
   $scope.linesPageStart = 0;
   $scope.paginationStart=0;
   $scope.paginationSize=10;
   $scope.pause = false;
+  $scope.lines = analyseApp.file;
 
   var inTags = $filter('inTags');
 
@@ -50,7 +49,7 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter',function($sco
       }
     });
 
-    var lines = _.filter(subset($scope.lines), function(line){
+    var lines = _.filter(subset(analyseApp.file), function(line){
       var isTag = $.map(tags, function(tag){
         return (line.indexOf(tag.value) != -1);
       });

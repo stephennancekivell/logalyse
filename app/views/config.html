@@ -32,6 +32,6 @@
 			<pre ng-bind-html-unsafe="parsedLine"></pre>
 			<input type="button" class="btn info" value="next line" ng-click="nextLine()">
 		</div>
-		<input type="button" class="btn pull-right" value="next" ng-click="next">
+		<input type="button" class="btn pull-right" value="next" ng-class="{true:'disabled', false:'btn-primary'}[date==null]" ng-click="next()">
 	</div>
 </div>

@@ -5,6 +5,6 @@
 			<file-loader lines="lines"></file-loader>
 		</div>
 		<h3>limit lines of file.</h3>
-		<input type="button" class="pull-right" ng-click="next()" value="next">
+		<input type="button" class="btn pull-right" ng-class="{true:'disabled', false:'btn-primary'}[lines==null]" ng-click="next()" value="next">
 	</div>
 </div>

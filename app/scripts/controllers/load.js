@@ -1,10 +1,10 @@
 'use strict';
 
 analyseApp.controller('LoadCtrl', function($scope, $location) {
-	$scope.lines = undefined;
+	$scope.lines = null;
 
 	$scope.next = function(){
-		if ($scope.lines != undefined){
+		if ($scope.lines != null){
 			analyseApp.file = $scope.lines;
 			$location.url('/config');
 		} else {

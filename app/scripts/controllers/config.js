@@ -35,7 +35,11 @@ analyseApp.controller('ConfigCtrl', function($scope, $location, userPrefs) {
 	},true);
 
 	$scope.next = function(){
-
+		if ($scope.date == null){
+			alert('set the date format first');
+		} else {
+			$location.url('/analyse');
+		}
 	}
 
 	$scope.p = userPrefs.get();
