@@ -42,6 +42,10 @@ analyseApp.controller('ConfigCtrl', ['$scope','$location', 'userPrefs', function
 		}
 	}
 
+	$scope.back = function(){
+		$location.url('/load');
+	}
+
 	$scope.p = userPrefs.get();
   if ($scope.p == null){
     $scope.p = analyseApp.defaultP;

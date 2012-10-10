@@ -1,37 +1,47 @@
-<div class="container">
+<div class="row centralRow">
 
-	<div class="hero-unit config">
-		<h1>Configure the date format!</h1>
-		<div class="row">
-			<div class="span6">
-				<table>
-					<tr>
-						<td>
-							<label>dateSearch</label>
-						</td>
-						<td>
-							<input type="text" ng-model="p.dateSearch" placeholder="dateSearch" /><i ng-class="{false:'icon-ok', true:'icon-warning-sign'}[dateSearchMatched==null]" />
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<label>dateFormat</label>
-						</td>
-						<td>
-							<input type="text" ng-model="p.dateFormat" placeholder="dateFormat" /><i ng-class="{false:'icon-ok', true:'icon-warning-sign'}[date==null]" />
-						</td>
-					</tr>
-				</table>
-			</div>
-			<div class="span4">
-				<h2>{{date|date:'short'}}</h2>
-			</div>
-		</div>
-		<div class="row">
-			<h4>Log line</h4>
-			<pre ng-bind-html-unsafe="parsedLine"></pre>
-			<input type="button" class="btn info" value="next line" ng-click="nextLine()">
-		</div>
-		<input type="button" class="btn pull-right" value="next" ng-class="{true:'disabled', false:'btn-primary'}[date==null]" ng-click="next()">
+	<div class="span2 offset1 pull-left">
+		<input type="button" class="btn" value="back" ng-click="back();">
 	</div>
+
+	<div class="span2 pull-right">
+		<input type="button" class="btn" value="next" ng-class="{true:'disabled', false:'btn-primary'}[date==null]" ng-click="next()">
+	</div>
+
+	<div class="container">
+		<div class="hero-unit config">
+			<h1>Configure the date format!</h1>
+			<div class="row">
+				<div class="span6">
+					<table>
+						<tr>
+							<td>
+								<label>Regular Expression <a class="icon-question-sign" href="https://developer.mozilla.org/en-US/docs/JavaScript/Guide/Regular_Expressions"></a></label>
+							</td>
+							<td>
+								<input type="text" ng-model="p.dateSearch" placeholder="dateSearch" /><i ng-class="{false:'icon-ok', true:'icon-warning-sign'}[dateSearchMatched==null]" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label>Date Format <a class="icon-question-sign" href="http://code.google.com/p/datejs/wiki/FormatSpecifiers#toString_(available_in_core.js_)"></a></label>
+							</td>
+							<td>
+								<input type="text" ng-model="p.dateFormat" placeholder="dateFormat" /><i ng-class="{false:'icon-ok', true:'icon-warning-sign'}[date==null]" />
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="span4">
+					<h2>{{date|date:'short'}}</h2>
+				</div>
+			</div>
+			<div class="row">
+				<h4>Log line</h4>
+				<pre ng-bind-html-unsafe="parsedLine"></pre>
+				<input type="button" class="btn info" value="next line" ng-click="nextLine()">
+			</div>
+		</div>
+	</div>
+
 </div>
