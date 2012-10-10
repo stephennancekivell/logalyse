@@ -66,27 +66,57 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter',function($sco
     $scope.data =  $.map(tags, function(tag){
       var tlines = _.filter(lines, function(line){ return (line.indexOf(tag.value) != -1); });
 
-      var data = $.map(tlines, function(line){
+      var date = $.map(tlines, function(line){
         return {date:$scope.getDate(line),count:0};
       });
 
 
-      data = _.filter(data, function(d){return d.date != null});
+      date = _.filter(date, function(d){return d.date != null});
 
-      data = _.groupBy(data, function(o){
+      date = _.groupBy(date, function(o){
         return Math.floor(o.date.getTime());
       });
 
-      data = _.toArray(data);
+      date = _.toArray(date);
 
-      data = $.map(data, function(a){
+      date = $.map(date, function(a){
         return [[a[0].date.getTime(), a.length]];
       });
       
-      data = _.sortBy(data, function(d){return d[0]});
+      date = _.sortBy(date, function(d){return d[0]});
 
-      return {data:data, label:tag.value, clickable:true};
+      return {data:date, label:tag.value, clickable:true};
     });
+
+    $scope.buildChart = function(){
+      var tags = _.filter($scope.p.tags, function(tag){
+        if (typeof tag.plot != 'undefined'){
+          return tag.plot;
+        } else {
+          return true;
+        }
+      });
+
+      var tagData = {};
+      _.each(tags, function(tag){
+          tagData[tag.value] = [];
+        });
+
+      for (var i=0; i< analyseApp.file.length-1; i++){
+        var line = analyseApp.file[i];
+
+        var matchingTags = _.filter(tags, function(){ return line.indexOf(tag.value) != -1; });
+        if (matchingTags.length > 0){
+          var date = $scope.getDate(line);
+          if (date != null){
+            _.each(matchingTags, function(tag){
+              tagData[tag.value].push({data:date.getTime(), lineNumber:i});
+            });
+          }
+        }
+      }
+    };
+
 
     $scope.$on('plotclick',function(e){
       console.log(arguments);
