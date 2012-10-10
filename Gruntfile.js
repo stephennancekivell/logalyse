@@ -34,8 +34,11 @@ module.exports = function( grunt ) {
         options: {
           css_dir: 'temp/styles',
           sass_dir: 'app/styles',
-          images_dir: 'app/images',
+          images_dir: '/images',
           javascripts_dir: 'temp/scripts',
+          // For this issue
+          // https://github.com/yeoman/yeoman/issues/419
+          config: '.compass.rb', 
           force: true
         }
       }
