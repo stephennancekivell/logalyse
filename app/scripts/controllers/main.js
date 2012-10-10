@@ -91,5 +91,9 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter',function($sco
     $scope.$on('plotclick',function(e){
       console.log(arguments);
     });
+
+    $scope.back = function(){
+      $location.url('/config');
+    }
   }
 }]);
