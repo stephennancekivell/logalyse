@@ -1,0 +1,37 @@
+<div class="container">
+
+	<div class="hero-unit config">
+		<h1>Configure the date format!</h1>
+		<div class="row">
+			<div class="span6">
+				<table>
+					<tr>
+						<td>
+							<label>dateSearch</label>
+						</td>
+						<td>
+							<input type="text" ng-model="p.dateSearch" placeholder="dateSearch" /><i ng-class="{false:'icon-ok', true:'icon-warning-sign'}[dateSearchMatched==null]" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label>dateFormat</label>
+						</td>
+						<td>
+							<input type="text" ng-model="p.dateFormat" placeholder="dateFormat" /><i ng-class="{false:'icon-ok', true:'icon-warning-sign'}[date==null]" />
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="span4">
+				<h2>{{date|date:'short'}}</h2>
+			</div>
+		</div>
+		<div class="row">
+			<h4>Log line</h4>
+			<pre ng-bind-html-unsafe="parsedLine"></pre>
+			<input type="button" class="btn info" value="next line" ng-click="nextLine()">
+		</div>
+		<input type="button" class="btn pull-right" value="next" ng-click="next">
+	</div>
+</div>

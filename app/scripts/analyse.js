@@ -20,3 +20,13 @@ var analyseApp = angular.module('analyseApp', ['ui'])
         redirectTo: '/load'
       });
   }]);
+
+analyseApp.defaultP = {
+  "showAll":true,
+  "subsetStart":"0",
+  "subsetCount":"1000",
+  "dateSearch":"\\w+\\s+\\d+\\s+\\d+:\\d+",
+  "dateFormat":"MMM +d +HH:mm",
+  "tags":[{values:""}]};
+
+analyseApp.file = ['Sep 30 23:17:01 stephen-ThinkPad-T520 CRON[13174]: pam_unix(cron:session): session closed for user root'];

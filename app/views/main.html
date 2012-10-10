@@ -28,38 +28,6 @@
 			</div>
 		</div>
 
-		<div class="row">
-
-			<input type="button" value="settings" class="btn" ng-click="modalShown=true;pause=true;">
-			<label class="checkbox">
-				<input type="checkbox" ng-model="pause" value="pause" /> Pause loading.
-			</label>
-			
-			
-			<div ui-modal class="settings fade" ng-model="modalShown">
-				<div>
-				<a ng-click="modalShown=false;pause=false;">close</a>
-				<div class="hero-unit">
-					<div class="dateFormat">
-						<label>dateSearch</label>
-						<input type="text" ng-model="p.dateSearch" placeholder="dateSearch" />
-						<label>dateFormat</label>
-						<input type="text" ng-model="p.dateFormat" placeholder="dateFormat" /><i class="icon-warning-sign" />
-						<h4>format</h4>
-						<p>{{getDate(lines[paginationStart])|date:'short'}}</p>
-							<li ng-repeat="line in lines | viewTaggedLines:p.tags:p.showAll | subset:paginationStart:2 | highlight:p.dateSearch">
-					  		<p id="line{{$index}}" ng-bind-html-unsafe="line"></p>
-					  	</li>
-						</div>
-						<div>
-							<label>subsetCount</label>
-							<input type="text" ng-model="p.subsetCount" placeholder="subset count" />
-							<label>subsetStart</label>
-							<input type="text" ng-model="p.subsetStart" placeholder="subset start" />
-						</div>
-					</div>
-				</div>
-			</div>
 
 		<div class="row">
 			<ul class="logLines">
