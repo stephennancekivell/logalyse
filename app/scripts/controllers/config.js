@@ -1,6 +1,6 @@
 'use strict';
 
-analyseApp.controller('ConfigCtrl', function($scope, $location, userPrefs) {
+analyseApp.controller('ConfigCtrl', ['$scope','$location', 'userPrefs', function($scope, $location, userPrefs) {
 	var idx = 0;
 
 	if (typeof analyseApp.file == 'undefined'){
@@ -50,4 +50,4 @@ analyseApp.controller('ConfigCtrl', function($scope, $location, userPrefs) {
   $scope.$watch('p', function() {
     userPrefs.put($scope.p);
   }, true);
-});
+}]);

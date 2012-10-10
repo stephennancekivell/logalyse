@@ -1,6 +1,6 @@
 'use strict';
 
-analyseApp.controller('LoadCtrl', function($scope, $location) {
+analyseApp.controller('LoadCtrl', ['$scope','$location',function($scope, $location) {
 	$scope.lines = null;
 
 	$scope.next = function(){
@@ -11,4 +11,4 @@ analyseApp.controller('LoadCtrl', function($scope, $location) {
 			alert('load a file first');
 		}
 	}
-});
+}]);

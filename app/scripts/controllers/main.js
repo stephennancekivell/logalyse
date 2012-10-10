@@ -6,6 +6,11 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter',function($sco
   $scope.paginationStart=0;
   $scope.paginationSize=10;
   $scope.pause = false;
+  
+  if (typeof analyseApp.file == 'undefined'){
+    $location.url('/load');
+  }
+
   $scope.lines = analyseApp.file;
 
   var inTags = $filter('inTags');
