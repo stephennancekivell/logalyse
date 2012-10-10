@@ -4,11 +4,19 @@
 var analyseApp = angular.module('analyseApp', ['ui'])
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider
-      .when('/', {
+      .when('/analyse', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
+      .when('/load', {
+        templateUrl: 'views/load.html',
+        controller: 'LoadCtrl'
+      })
+      .when('/config', {
+        templateUrl: 'views/config.html',
+        controller: 'ConfigCtrl'
+      })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/load'
       });
   }]);
