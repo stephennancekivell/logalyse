@@ -1,6 +1,6 @@
 'use strict';
 
-analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter',function($scope, userPrefs, $filter) {
+analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter', '$location',function($scope, userPrefs, $filter, $location) {
   $scope.loading = true;
   $scope.linesPageStart = 0;
   $scope.paginationStart=0;
