@@ -28,6 +28,7 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter', '$location',
   $scope.$watch('[p, lines, pause]', function() {
     if ($scope.pause === false){
       $scope.drawChart();
+      $scope.buildChart();
     }
   },true);
   
@@ -104,19 +105,35 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter', '$location',
 
       for (var i=0; i< analyseApp.file.length-1; i++){
         var line = analyseApp.file[i];
+        var lineDate = $scope.getDate(line);
 
-        var matchingTags = _.filter(tags, function(){ return line.indexOf(tag.value) != -1; });
-        if (matchingTags.length > 0){
-          var date = $scope.getDate(line);
-          if (date != null){
-            _.each(matchingTags, function(tag){
-              tagData[tag.value].push({data:date.getTime(), lineNumber:i});
-            });
+        angular.forEach(tags, function(tag){
+          if (line.indexOf(tag.value) != -1){
+            tagData[tag.value].push({date:lineDate, lineNumber:i});
           }
-        }
+        });
       }
-    };
 
+      angular.forEach(tagData, function(v,k){
+        var date = v[0].date
+        var groupedPoints = _.groupBy(v, function(point){
+          return point.date;
+        });
+        console.log(groupedPoints);
+        tagData[k] =  $.map(groupedPoints, function(point){
+          return {
+            lineNumber: point[0].lineNumber,
+            date: point[0].date,
+            count: point.length
+          }
+        });
+      });
+
+      $scope.data = $.map(tagData, function(a,b){
+        console.log(a,b);
+      });
+
+    }
 
     $scope.$on('plotclick',function(e){
       console.log(arguments);
