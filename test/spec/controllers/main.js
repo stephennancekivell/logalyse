@@ -18,7 +18,7 @@ describe('Controller: MainCtrl', function() {
 
   beforeEach(function(){
     scope.p = {
-        tags : [{value:'nvidia'}],
+        tags : [{label:'nvidia'}],
         dateSearch: '\\w+\\s+\\d+\\s+\\d+:\\d+',
         dateFormat: 'MMM +d +HH:mm',
         groupBy: 1
@@ -34,7 +34,6 @@ describe('Controller: MainCtrl', function() {
     scope.buildChart();
 
     expect(scope.data).toEqual([{
-      value:'nvidia',
       label:'nvidia',
       clickable:true,
       data:[
@@ -43,7 +42,7 @@ describe('Controller: MainCtrl', function() {
   });
 
   it('should ignore lines that dont match a tag.', function() {
-    scope.p.tags = [{value:'notThat'}];
+    scope.p.tags = [{label:'notThat'}];
     analyseApp.file = [
       'Oct 7 13:03:10 stephen-ThinkPad-T520 kernel: [ 7414.713167] nvidia 0000:01:00.0: restoring config space at offset 0x4 (was 0x0, writing 0xf0000000)',    
       'Oct 7 13:03:10 stephen-ThinkPad-T520 kernel: [ 7414.713167] nvidia 0000:01:00.0: restoring config space at offset 0x4 (was 0x0, writing 0xf0000000)'];
@@ -54,7 +53,7 @@ describe('Controller: MainCtrl', function() {
   });
 
   it('should graph each tag as a different line', function(){
-    scope.p.tags = [{value:'nvidia'},{value:'cron'}];
+    scope.p.tags = [{label:'nvidia'},{label:'cron'}];
     analyseApp.file = [
       'Oct 7 13:03:10 stephen-ThinkPad-T520 kernel: [ 7414.713167] nvidia 0000:01:00.0: restoring config space at offset 0x4 (was 0x0, writing 0xf0000000)',    
       'Oct 7 13:03:10 stephen-ThinkPad-T520 kernel: [ 7414.713167] cron 0000:01:00.0: restoring config space at offset 0x4 (was 0x0, writing 0xf0000000)',
@@ -63,15 +62,13 @@ describe('Controller: MainCtrl', function() {
     scope.buildChart();
 
     expect(scope.data).toEqual([
-      { value:'nvidia',
-        label:'nvidia',
+      { label:'nvidia',
         clickable:true,
         data:[
           {0: 1349568180000, 1:1},
           {0: 1349658240000, 1:1}]
       },
-      { value:'cron',
-        label:'cron',
+      { label:'cron',
         clickable:true,
         data:[
           {0: 1349568180000, 1:1}]

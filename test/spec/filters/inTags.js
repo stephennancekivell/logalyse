@@ -13,7 +13,7 @@ describe('Filter: inTags', function() {
 
   it('should return the filtered input.', function() {
     var lines = ['a','b'];
-    var tags = [{value:'a'}];
+    var tags = [{label:'a'}];
 
     var answer = inTags(lines, tags);
     
@@ -32,7 +32,7 @@ describe('Filter: inTags', function() {
 
   it('should only match valid matches', function(){
     var lines = ['Oct 7 07:35:11 stephen-ThinkPad-T520 rsyslogd: [origin software="rsyslogd" swVersion="5.8.6" x-pid="935" x-info="http://www.rsyslog.com"] rsyslogd was HUPed'];
-    var tags = [{value:'cron'},{value:'nvidia'}];
+    var tags = [{label:'cron'},{label:'nvidia'}];
 
     var answer = inTags(lines, tags);
     

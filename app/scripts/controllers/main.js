@@ -44,7 +44,6 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter', '$location',
   function subset(lines) {
     return lines.slice(parseInt($scope.p.subsetStart), parseInt($scope.p.subsetStart)+parseInt($scope.p.subsetCount));
   }
-  //    return {data:date, label:tag.value, clickable:true};
   
   $scope.buildChart = function(){
     var tags = _.filter($scope.p.tags, function(tag){
@@ -56,7 +55,6 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter', '$location',
     });
 
     tags = _.map(tags, function(tag){
-      tag.label = tag.value;
       tag.clickable = true;
       tag.data = [];
       return tag;
@@ -90,7 +88,6 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter', '$location',
     });
 
     $scope.data = tags;
-    console.log('buildChart', tags);
   }
 
   $scope.$on('plotclick',function(e){

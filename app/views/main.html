@@ -18,7 +18,7 @@
 							<th></th>
 						</tr>
 					<tr ng-repeat="tag in p.tags">
-						<td><input type="text" class="" ng-model="tag.value" /></td>
+						<td><input type="text" class="" ng-model="tag.label" /></td>
 						<td><input type="checkbox" ng-model="tag.plot"></td>
 						<td><input type="checkbox" ng-model="tag.view"></td>
 						<td><a ng-click="p.tags.splice($index, $index+1)" href="#">[x]</a></td>

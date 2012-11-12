@@ -12,7 +12,7 @@ analyseApp.filter('viewTaggedLines', function() {
 
 	  	return _.filter(lines, function(line){
 	  		var isTagged = _.map(viewingTags, function(tag){
-	  			return (line.indexOf(tag.value) != -1);
+	  			return (line.indexOf(tag.label) != -1);
 	  		});
 	  		return _.reduce(isTagged, function(a,b){
 	        return (a | b);

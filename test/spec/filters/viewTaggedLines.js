@@ -13,8 +13,8 @@ describe('Filter: viewTaggedLines', function() {
 
   it('should remove lines tagged !view', function() {
     var lines = ['a','b'];
-    var tags = [{value:'a',plot:true,view:true},
-                {value:'b',plot:true,view:false}];
+    var tags = [{label:'a',plot:true,view:true},
+                {label:'b',plot:true,view:false}];
     
     expect(viewTaggedLines(lines,tags)).toEqual(['a']);
   });
@@ -28,8 +28,8 @@ describe('Filter: viewTaggedLines', function() {
 
   it('should show all when showAll', function(){
     var lines = ['a','b','c'];
-    var tags = [{value:'a',plot:true,view:true},
-                {value:'b',plot:true,view:false}];
+    var tags = [{label:'a',plot:true,view:true},
+                {label:'b',plot:true,view:false}];
 
     expect(viewTaggedLines(lines,tags,true)).toEqual(['a','b','c']);
   });
