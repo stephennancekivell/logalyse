@@ -86,8 +86,26 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter', '$location',
     $scope.data = tags;
   }
 
-  $scope.$on('plotclick',function(e){
-    console.log(arguments);
+  $scope.$on('plotclick',function(e, point){
+    // set paginationStart to the index of the line of the point that was clicked on.
+    var tdate = point.datapoint[0];
+    var tag = point.label;
+    var found = false;
+
+    for (var i=0; i< analyseApp.file.length; i++){
+      var line = analyseApp.file[i];
+      var lineDate = $scope.getDate(line);
+      if (tdate === lineDate.getTime() && line.indexOf(tag) != -1){
+        $scope.paginationStart = i;
+        $scope.$apply();
+        found = true;
+        break;
+      }
+    }
+
+    if (found === false){
+      console.log('couldnt find the point you clicked on');
+    }
   });
 
   $scope.back = function(){
@@ -95,13 +113,9 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter', '$location',
   }
 
   $scope.pageForward = function(){
-    if (analyseApp.file.length < $scope.paginationStart){
-      $scope.paginationStart += $scope.paginationSize;
-    }
+    $scope.paginationStart += $scope.paginationSize;
   }
   $scope.pageBack = function(){
-    if ($scope.paginationStart > 0){
-      $scope.paginationStart -= $scope.paginationSize;
-    }
+    $scope.paginationStart -= $scope.paginationSize;
   }
 }]);

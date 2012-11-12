@@ -1,7 +1,6 @@
 'use strict';
 
 analyseApp.controller('LinesViewerCtrl', function($scope) {
-	console.log('LinesViewerCtrl');
 	$scope.paginationStart = 0;
 	$scope.paginationSize = 10;
 	//$scope.pLines = $scope.lines;

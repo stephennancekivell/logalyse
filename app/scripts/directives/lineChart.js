@@ -9,7 +9,6 @@ analyseApp.directive('lineChart', function() {
     link: function postLink(scope, element, attrs) {       
     	scope.$watch('data', function(){
     		if (typeof scope.data != 'undefined'){
-                console.log('plotting ', scope.data);
                 var conf = {
                     points: { show : true },
                     lines: { show: true },
@@ -18,8 +17,9 @@ analyseApp.directive('lineChart', function() {
                 };
 	    		$.plot(element, scope.data, conf);
                 $(element).bind('plotclick', function(event,pos,item){
-                    // this happens way too often.
-                    scope.$parent.$broadcast('plotclick',{label:item.series.label,datapoint:item.datapoint});
+                    if (item != null){
+                        scope.$parent.$broadcast('plotclick',{label:item.series.label,datapoint:item.datapoint});
+                    }
                 });
 	    	}
     	});
