@@ -9,6 +9,7 @@ analyseApp.directive('lineChart', function() {
     link: function postLink(scope, element, attrs) {       
     	scope.$watch('data', function(){
     		if (typeof scope.data != 'undefined'){
+                console.log('plotting ', scope.data);
                 var conf = {
                     points: { show : true },
                     lines: { show: true },

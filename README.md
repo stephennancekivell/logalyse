@@ -27,3 +27,6 @@ Do i want a service. that takes lines, settings and spits out the chart able stu
 	Chart directive.
 
 The file loader could be a seperate thing, maybe broadcasting. Directive, with a param for the text.
+
+===todo===
+Use lesscss.
