@@ -40,10 +40,10 @@
 			</ul>
 			<ul class="pager">
 			  <li class="previous" ng-class="{true:'.disabled',false:''}[p.subsetStart==0]">
-			    <a href="#">&larr; Older | <b>{{paginationStart}}</b></a>
+			    <button ng-click="pageBack()">&larr; Older | <b>{{paginationStart}}</b></button>
 			  </li>
 			  <li class="next">
-			    <a href="#"><b>{{lines.length}}</b> | Newer &rarr;</a>
+			    <button ng-click="pageForward()"><b>{{lines.length}}</b> | Newer &rarr;</button>
 			  </li>
 			</ul>
 		</div>

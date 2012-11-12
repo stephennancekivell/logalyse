@@ -40,10 +40,6 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter', '$location',
       return null;
     }
   }
-
-  function subset(lines) {
-    return lines.slice(parseInt($scope.p.subsetStart), parseInt($scope.p.subsetStart)+parseInt($scope.p.subsetCount));
-  }
   
   $scope.buildChart = function(){
     var tags = _.filter($scope.p.tags, function(tag){
@@ -96,5 +92,16 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter', '$location',
 
   $scope.back = function(){
     $location.url('/config');
+  }
+
+  $scope.pageForward = function(){
+    if (analyseApp.file.length < $scope.paginationStart){
+      $scope.paginationStart += $scope.paginationSize;
+    }
+  }
+  $scope.pageBack = function(){
+    if ($scope.paginationStart > 0){
+      $scope.paginationStart -= $scope.paginationSize;
+    }
   }
 }]);
