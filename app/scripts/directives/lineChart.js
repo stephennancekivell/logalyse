@@ -19,7 +19,7 @@ analyseApp.directive('lineChart', function() {
 	    		$.plot(element, scope.data, conf);
                 $(element).bind('plotclick', function(event,pos,item){
                     // this happens way too often.
-                    scope.$parent.$broadcast('plotclick',{tag:item.series.label,datapoint:item.datapoint});
+                    scope.$parent.$broadcast('plotclick',{label:item.series.label,datapoint:item.datapoint});
                 });
 	    	}
     	});

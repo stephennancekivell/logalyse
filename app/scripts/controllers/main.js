@@ -57,6 +57,7 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter', '$location',
 
     tags = _.map(tags, function(tag){
       tag.label = tag.value;
+      tag.clickable = true;
       tag.data = [];
       return tag;
     });
@@ -72,8 +73,7 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter', '$location',
 
       angular.forEach(tags, function(tag){
         if (line.indexOf(tag.label) != -1){
-
-          tagLookup[tag.label].data.push({date:lineDate, lineNumber:i});
+          tagLookup[tag.label].data.push({date:lineDate});
         }
       });
     }
@@ -83,11 +83,9 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter', '$location',
         return point.date;
       });
       tag.data = $.map(groupedPoints, function(point){
-        return {
-          lineNumber: point[0].lineNumber,
-          date: point[0].date,
-          count: point.length
-        }
+        if (point.length >0 && point[0].date != null){
+          return {0: point[0].date.getTime(), 1: point.length};
+        } else return {};
       });
     });
 

@@ -36,9 +36,10 @@ describe('Controller: MainCtrl', function() {
     expect(scope.data).toEqual([{
       value:'nvidia',
       label:'nvidia',
+      clickable:true,
       data:[
-        {date: new Date(1349568180000),lineNumber:0, count:2},
-        {date: new Date(1349658240000),lineNumber:2, count:1}]}]);
+        {0: 1349568180000, 1:2},
+        {0: 1349658240000, 1:1}]}]);
   });
 
   it('should ignore lines that dont match a tag.', function() {
@@ -64,14 +65,16 @@ describe('Controller: MainCtrl', function() {
     expect(scope.data).toEqual([
       { value:'nvidia',
         label:'nvidia',
+        clickable:true,
         data:[
-          {date: new Date(1349568180000),lineNumber:0, count:1},
-          {date: new Date(1349658240000),lineNumber:2, count:1}]
+          {0: 1349568180000, 1:1},
+          {0: 1349658240000, 1:1}]
       },
       { value:'cron',
         label:'cron',
+        clickable:true,
         data:[
-          {date: new Date(1349568180000),lineNumber:1, count:1}]
+          {0: 1349568180000, 1:1}]
       }]);
   });
 });
