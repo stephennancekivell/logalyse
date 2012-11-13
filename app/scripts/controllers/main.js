@@ -95,7 +95,7 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter', '$location',
     for (var i=0; i< analyseApp.file.length; i++){
       var line = analyseApp.file[i];
       var lineDate = $scope.getDate(line);
-      if (tdate === lineDate.getTime() && line.indexOf(tag) != -1){
+      if (lineDate != null && tdate === lineDate.getTime() && line.indexOf(tag) != -1){
         $scope.paginationStart = i;
         $scope.$apply();
         found = true;
