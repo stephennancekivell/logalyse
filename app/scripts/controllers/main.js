@@ -42,6 +42,7 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter', '$location',
   }
   
   $scope.buildChart = function(){
+    var startTime = new Date();
     var tags = _.filter($scope.p.tags, function(tag){
       if (typeof tag.plot != 'undefined'){
         return tag.plot;
@@ -84,6 +85,8 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter', '$location',
     });
 
     $scope.data = tags;
+
+    console.log('buildChart in '+(new Date()-startTime)+'ms');
   }
 
   $scope.$on('plotclick',function(e, point){
