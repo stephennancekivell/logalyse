@@ -1,28 +1,35 @@
 #!/bin/bash
 
-TARGET_BASE=/var/www/p/test
+TARGET=stephenn.info
+TARGET_BASE=/var/www/p
 TARGET_ARCHIVE=$TARGET_BASE/analyse.tgz
 TARGET_LOCATION=$TARGET_BASE/analyse
 
 case "$1" in
 	deploy)
-		echo "deploying"
-		#yeoman build
-		#cd dist
-		#tar -czf ../dist.tgz *
-		#cd ..
+		echo "building"
+		yeoman build
+		if [ ! -d dist ];
+		then
+			echo "yeoman didnt build"
+			exit 1
+		fi
+		cd dist
+		tar -czf ../dist.tgz *
+		cd ..
 
 		echo "backing up"
-		ssh stephenn.info << EOF
+		ssh $TARGET << EOF
 			if [ -f $TARGET_ARCHIVE ];
 			then
 				mv $TARGET_ARCHIVE $TARGET_ARCHIVE.1
 			fi
 EOF
 
-		scp dist.tgz stephenn.info:$TARGET_ARCHIVE
+		echo "deploying"
+		scp dist.tgz $TARGET:$TARGET_ARCHIVE
 
-		ssh stephenn.info << EOF
+		ssh $TARGET << EOF
 			echo "cleaning old deployment"
 			rm -rf $TARGET_LOCATION/*
 
@@ -39,7 +46,7 @@ EOF
 	rollback)
 		echo "rolling back"
 		
-		ssh stephenn.info << EOF
+		ssh $TARGET << EOF
 			rm -rf $TARGET_LOCATION/*
 
 			mv $TARGET_ARCHIVE.1 $TARGET_ARCHIVE
