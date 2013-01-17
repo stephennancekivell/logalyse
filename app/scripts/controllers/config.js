@@ -1,20 +1,40 @@
 'use strict';
 
 analyseApp.controller('ConfigCtrl', ['$scope','$location', 'userPrefs', function($scope, $location, userPrefs) {
+	
+	$scope.dateFormatToRegex = {
+		's': '\\d',
+		'm': '\\d',
+		'h': '\\d',
+		'H': '\\d',
+		'd': '\\d',
+		'M': '\\w',
+		'y': '\\d',
+		't': '\\w'
+	};
+
+	// if (typeof analyseApp.file == 'undefined'){
+	// 	$location.url('/load');
+	// }
+
 	var idx = 0;
-
-	if (typeof analyseApp.file == 'undefined'){
-		$location.url('/load');
-	}
-
 	$scope.nextLine = function(){
 		$scope.line = analyseApp.file[idx];
 		idx +=1;
 	}
 	$scope.nextLine();
 
-	$scope.$watch('[p.dateSearch, p.dateFormat]', function(){
-		var regex = new RegExp('(' + $scope.p.dateSearch + ')', 'i');
+	$scope.p = userPrefs.get();
+  if ($scope.p == null){
+    $scope.p = analyseApp.defaultP;
+  }
+
+  $scope.$watch('p', function() {
+    userPrefs.put($scope.p);
+  }, true);
+
+	$scope.$watch('p.dateFormat', function(){
+		var regex = new RegExp('(' + $scope.getRegexFromDateFormat($scope.p.dateFormat) + ')', 'i');
 
 		$scope.dateSearchMatched = regex.exec($scope.line);
 		if ($scope.dateSearchMatched == null){
@@ -28,7 +48,6 @@ analyseApp.controller('ConfigCtrl', ['$scope','$location', 'userPrefs', function
 	    	$scope.date = Date.parseExact(dateString, $scope.p.dateFormat);
 	    } catch(e) {
 	    	$scope.date = null;
-	    	$scope.formatWorks = false;
 	    }
 	  }
 		
@@ -46,12 +65,15 @@ analyseApp.controller('ConfigCtrl', ['$scope','$location', 'userPrefs', function
 		$location.url('/load');
 	}
 
-	$scope.p = userPrefs.get();
-  if ($scope.p == null){
-    $scope.p = analyseApp.defaultP;
-  }
-
-  $scope.$watch('p', function() {
-    userPrefs.put($scope.p);
-  }, true);
+  $scope.getRegexFromDateFormat = function(format){
+		var regex = "";
+		_.each(format, function(x){
+			if ($scope.dateFormatToRegex.hasOwnProperty(x)){
+				regex += $scope.dateFormatToRegex[x];
+			} else {
+				regex += x;
+			}
+		});
+		return regex;
+	}
 }]);
