@@ -5,7 +5,7 @@ analyseApp.directive('fileLoader', function() {
     template: '<div><input type="file" name="files[]"/></div>',
     restrict: 'E',
     scope: {
-    	lines:'=',
+    	onload:'&',
     },
     link: function postLink(scope, element, attrs) {
 
@@ -15,9 +15,7 @@ analyseApp.directive('fileLoader', function() {
 		    var reader = new FileReader();
 
 		    reader.onload = function(e){
-		    	scope.lines = e.target.result.split('\n');
-		    	scope.$digest();
-		    	scope.$parent.$digest();
+		    	scope.onload({file:e.target.result});
 		    }
 
 		    reader.readAsText(files[0]);

@@ -1,7 +1,7 @@
 'use strict';
 
 //have problems making this because of the fileloader part.
-describe('Controller: MainCtrl', function() {
+xdescribe('Controller: MainCtrl', function() {
 
   // load the controller's module
   beforeEach(module('analyseApp'));

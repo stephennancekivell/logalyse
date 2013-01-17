@@ -1,16 +1,10 @@
 <div class="row centralRow">
-
-	<div class="span2 pull-right">
-		<input type="button" class="btn" value="next" ng-class="{true:'disabled', false:'btn-primary'}[lines==null]" ng-click="next()">
-	</div>
-
 	<div class="container">
 		<div class="hero-unit span8 load">
 			<h1>Load the file!</h1>
 			<div class="row">
-				<file-loader lines="lines"></file-loader>
+				<file-loader onload="onload(file)"></file-loader>
 			</div>
-			<!-- <h3>limit lines of file.</h3> -->
 		</div>
 	</div>
 </div>
