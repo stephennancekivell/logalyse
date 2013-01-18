@@ -1,7 +1,7 @@
 'use strict';
 
 analyseApp.controller('ConfigCtrl', ['$scope','$location', 'userPrefs', function($scope, $location, userPrefs) {
-	
+	$scope.date = true;	// having this fixes the issue where onload the date format tick would be the warning sign
 	$scope.dateFormatToRegex = {
 		's': '\\d',
 		'm': '\\d',
@@ -12,10 +12,6 @@ analyseApp.controller('ConfigCtrl', ['$scope','$location', 'userPrefs', function
 		'y': '\\d',
 		't': '\\w'
 	};
-
-	// if (typeof analyseApp.file == 'undefined'){
-	// 	$location.url('/load');
-	// }
 
 	var idx = 0;
 	$scope.nextLine = function(){
@@ -34,6 +30,11 @@ analyseApp.controller('ConfigCtrl', ['$scope','$location', 'userPrefs', function
   }, true);
 
 	$scope.$watch('p.dateFormat', function(){
+		buildDate();
+		
+	},true);
+
+	var buildDate = function(){
 		var regex = new RegExp('(' + $scope.getRegexFromDateFormat($scope.p.dateFormat) + ')', 'i');
 
 		$scope.dateSearchMatched = regex.exec($scope.line);
@@ -50,8 +51,7 @@ analyseApp.controller('ConfigCtrl', ['$scope','$location', 'userPrefs', function
 	    	$scope.date = null;
 	    }
 	  }
-		
-	},true);
+	};	
 
 	$scope.next = function(){
 		if ($scope.date == null){

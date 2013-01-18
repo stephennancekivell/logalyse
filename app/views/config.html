@@ -5,7 +5,7 @@
 	</div>
 
 	<div class="span2 pull-right">
-		<input type="button" class="btn" value="next" ng-class="{true:'disabled', false:'btn-primary'}[date==null]" ng-click="next()">
+		<input type="button" class="btn" value="next" ng-class="{true:'disabled', false:'btn-primary'}[date==null]" ng-click="next()" />
 	</div>
 
 	<div class="container">
@@ -19,7 +19,8 @@
 								<label>Date Format <a class="icon-question-sign" href="http://code.google.com/p/datejs/wiki/FormatSpecifiers#toString_(available_in_core.js_)"></a></label>
 							</td>
 							<td>
-								<input type="text" ng-model="p.dateFormat" placeholder="dateFormat" /><i ng-class="{false:'icon-ok', true:'icon-warning-sign'}[date==null]" />
+								<input type="text" ng-model="p.dateFormat" placeholder="dateFormat" />
+								<i ng-class="{true:'icon-warning-sign', false:'icon-ok'}[date==null]" ></i>
 							</td>
 						</tr>
 					</table>
