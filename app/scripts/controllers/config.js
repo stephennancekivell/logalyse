@@ -30,12 +30,12 @@ analyseApp.controller('ConfigCtrl', ['$scope','$location', 'userPrefs', function
   }, true);
 
 	$scope.$watch('p.dateFormat', function(){
-		buildDate();
-		
+		$scope.buildDate();
 	},true);
 
-	var buildDate = function(){
-		var regex = new RegExp('(' + $scope.getRegexFromDateFormat($scope.p.dateFormat) + ')', 'i');
+	$scope.buildDate = function(){
+		var dateSearch = $scope.getRegexFromDateFormat($scope.p.dateFormat);
+		var regex = new RegExp('(' + dateSearch + ')', 'i');
 
 		$scope.dateSearchMatched = regex.exec($scope.line);
 		if ($scope.dateSearchMatched == null){
@@ -45,13 +45,13 @@ analyseApp.controller('ConfigCtrl', ['$scope','$location', 'userPrefs', function
 			$scope.parsedLine = $scope.line.replace(regex, '<span style="color:blue;">$1</span>');
 
 			try {
-	    	var dateString = $scope.line.match(new RegExp($scope.p.dateSearch, "i"))[0];
+	    	var dateString = $scope.line.match(new RegExp(dateSearch, "i"))[0];
 	    	$scope.date = Date.parseExact(dateString, $scope.p.dateFormat);
 	    } catch(e) {
 	    	$scope.date = null;
 	    }
 	  }
-	};	
+	};
 
 	$scope.next = function(){
 		if ($scope.date == null){
