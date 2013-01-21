@@ -34,6 +34,7 @@ analyseApp.controller('ConfigCtrl', ['$scope','$location', 'userPrefs', function
 
 	$scope.$watch('p.dateFormat', function(newValue, oldvalue){
 			$scope.date = $scope.buildDateFrom($scope.p.dateFormat);
+			$scope.p.dateSearch = $scope.getRegexFromDateFormat($scope.p.dateFormat);
 	},true);
 
 	$scope.buildDateFrom = function(format){

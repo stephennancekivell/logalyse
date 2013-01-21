@@ -11,7 +11,7 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter', '$location',
     $location.url('/load');
   }
 
-  $scope.lines = analyseApp.file;
+  $scope.lines = analyseApp.lines;
 
   var inTags = $filter('inTags');
 
@@ -36,7 +36,7 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter', '$location',
     	var dateString = line.match(new RegExp($scope.p.dateSearch, "i"))[0];
     	return Date.parseExact(dateString, $scope.p.dateFormat);
     } catch(e){
-      console.log('error parsing date');
+      console.log('error parsing date', e);
       return null;
     }
   }
@@ -62,8 +62,8 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter', '$location',
       tagLookup[tag.label] = tag;
     });
 
-    for (var i=0; i< analyseApp.file.length; i++){
-      var line = analyseApp.file[i];
+    for (var i=0; i< analyseApp.lines.length; i++){
+      var line = analyseApp.lines[i];
       var lineDate = $scope.getDate(line);
 
       angular.forEach(tags, function(tag){
