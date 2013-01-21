@@ -9,6 +9,8 @@ Shouldnt need date fromat and date search.
 Remember and guess different date formats and regex.
 
 ===todo===
+Different types of charts, line scatter plot.
+
 Processing icon.
 
 How to display big logs in in html
@@ -18,9 +20,6 @@ Chart amount of lines per hour/day/month. _.groupBy
 Chart a value in the log line.
 
 Could be storing good previous formats in localStorage.
-
-Use lesscss
-Different types of charts, line scatter plot.
 
 Infinate scroll type log viewer. http://jsfiddle.net/vojtajina/U7Bz9/
 
@@ -32,15 +31,13 @@ Do i want a service. that takes lines, settings and spits out the chart able stu
 No the chart should do that.
 Chart directive.
 
-The file loader could be a seperate thing, maybe broadcasting. Directive, with a param for the text.
-
 Log4j appender that uploads to my server.
 Users can register apps that each have a encryption key.
 the log4j appender uses that encryption.
 The decrypt key could be part of the app and stored in cookies or something. So the decrypt isnt stored in the log storing app.
-
-Email tags.
 	
 With that this can turn the app into a powerfull analytics dashboard.
 All you need to do is start uploading logs.
 Setup some good tags.
+
+Use lesscss

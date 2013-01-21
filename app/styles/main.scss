@@ -10,6 +10,13 @@ body{
 			margin-top:0px;
 			margin-bottom:0px;
 			padding: 10px 10px 10px;
+			a {
+				color:#999;
+				&:hover{
+					color:#999;
+					text-decoration:none;
+				}
+			}
 		}
 	}
 
