@@ -6,6 +6,8 @@ Shouldnt need date fromat and date search.
 	date search can be interpereted from the date format.
 	as MMM -> \w{3,3} or \w+
 
+Remember and guess different date formats and regex.
+
 ===todo===
 Processing icon.
 
@@ -15,11 +17,7 @@ Limit amount of lines. Subset of data. By date or count.
 Chart amount of lines per hour/day/month. _.groupBy
 Chart a value in the log line.
 
-Remember and guess different date formats and regex.
-* dd/MMM/yyyy:hh:mm:ss
-* MMM dd HH:mm:ss
-
-
+Could be storing good previous formats in localStorage.
 
 Use lesscss
 Different types of charts, line scatter plot.
@@ -35,7 +33,6 @@ No the chart should do that.
 Chart directive.
 
 The file loader could be a seperate thing, maybe broadcasting. Directive, with a param for the text.
-
 
 Log4j appender that uploads to my server.
 Users can register apps that each have a encryption key.

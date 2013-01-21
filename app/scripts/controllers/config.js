@@ -13,12 +13,15 @@ analyseApp.controller('ConfigCtrl', ['$scope','$location', 'userPrefs', function
 		't': '\\w'
 	};
 
+	$scope.knownDateFormats = ['MMM dd HH:mm:ss', 'dd/MMM/yyyy:hh:mm:ss'];
+
 	var idx = 0;
 	$scope.nextLine = function(){
-		$scope.line = analyseApp.file[idx];
+		$scope.line = analyseApp.lines[idx];
+		$scope.parsedLine = analyseApp.lines[idx];
 		idx +=1;
 	}
-	$scope.nextLine();
+	$scope.nextLine(); // set the first line
 
 	$scope.p = userPrefs.get();
   if ($scope.p == null){
@@ -29,28 +32,43 @@ analyseApp.controller('ConfigCtrl', ['$scope','$location', 'userPrefs', function
     userPrefs.put($scope.p);
   }, true);
 
-	$scope.$watch('p.dateFormat', function(){
-		$scope.buildDate();
+	$scope.$watch('p.dateFormat', function(newValue, oldvalue){
+			$scope.date = $scope.buildDateFrom($scope.p.dateFormat);
 	},true);
 
-	$scope.buildDate = function(){
-		var dateSearch = $scope.getRegexFromDateFormat($scope.p.dateFormat);
+	$scope.buildDateFrom = function(format){
+		var dateSearch = $scope.getRegexFromDateFormat(format);
 		var regex = new RegExp('(' + dateSearch + ')', 'i');
 
 		$scope.dateSearchMatched = regex.exec($scope.line);
 		if ($scope.dateSearchMatched == null){
 			$scope.parsedLine = $scope.line;
-			$scope.date = null;
+			return null;
 		} else {
 			$scope.parsedLine = $scope.line.replace(regex, '<span style="color:blue;">$1</span>');
 
 			try {
 	    	var dateString = $scope.line.match(new RegExp(dateSearch, "i"))[0];
-	    	$scope.date = Date.parseExact(dateString, $scope.p.dateFormat);
+	    	return Date.parseExact(dateString, format);
 	    } catch(e) {
-	    	$scope.date = null;
+	    	return null;
 	    }
 	  }
+	};
+
+	$scope.guessDateFormat = function(){
+		return _.reduce($scope.knownDateFormats, function(memo, format){
+			if (memo != null) {
+				return memo;
+			} else {
+				var date = $scope.buildDateFrom(format);
+				if (date != null){
+					return format;
+				} else {
+					return null;
+				}
+			}
+		}, null);
 	};
 
 	$scope.next = function(){
@@ -62,7 +80,7 @@ analyseApp.controller('ConfigCtrl', ['$scope','$location', 'userPrefs', function
 	}
 
 	$scope.back = function(){
-		$location.url('/load');
+		window.location = "#/load";
 	}
 
   $scope.getRegexFromDateFormat = function(format){
@@ -75,5 +93,11 @@ analyseApp.controller('ConfigCtrl', ['$scope','$location', 'userPrefs', function
 			}
 		});
 		return regex;
+	}
+
+	var df = $scope.guessDateFormat();
+	if (df != null){
+		console.log('date format guessed to be '+df);
+		$scope.p.dateFormat = df;
 	}
 }]);
