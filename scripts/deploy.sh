@@ -8,6 +8,7 @@ TARGET_LOCATION=$TARGET_BASE/analyse
 case "$1" in
 	deploy)
 		echo "building"
+		sh scripts/appendVersionInfo.sh
 		yeoman build
 		if [ ! -d dist ];
 		then
