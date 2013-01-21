@@ -95,8 +95,8 @@ analyseApp.controller('MainCtrl', ['$scope', 'userPrefs','$filter', '$location',
     var tag = point.label;
     var found = false;
 
-    for (var i=0; i< analyseApp.file.length; i++){
-      var line = analyseApp.file[i];
+    for (var i=0; i< analyseApp.lines.length; i++){
+      var line = analyseApp.lines[i];
       var lineDate = $scope.getDate(line);
       if (lineDate != null && tdate === lineDate.getTime() && line.indexOf(tag) != -1){
         $scope.paginationStart = i;
