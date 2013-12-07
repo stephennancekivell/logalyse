@@ -1,4 +1,9 @@
-==analyse==
+==logalyse==
+
+A tool for chating arbitrary files. You can search a log file and chart different tags.
+
+![screenshot](https://raw.github.com/stephennancekivell/logalyse/master/screenshot.png)
+
 ===done===
 Chart different tags in a log file.
 Click point on chart. navigate to log line.
